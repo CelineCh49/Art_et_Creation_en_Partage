@@ -2,16 +2,22 @@
 
 namespace App\Controller;
 
+use App\Repository\ArtistRepository;
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/main', name: 'app_main')]
-    public function index(): Response
+    #[Route('/', name: 'app_main')]
+    public function main(EventRepository $eventRepository, ArtistRepository $artistRepository): Response
     {
-        return $this->render('main/index.html.twig', [
+        $events= $eventRepository->findAll();
+        $artists= $artistRepository->findAll();
+        return $this->render('main/home.html.twig', [
+            'events'=> $events,
+            'artists' =>$artists,
             'controller_name' => 'MainController',
         ]);
     }

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+<div>
+    <h1>Contact</h1>
+    <div>
+        Si vous voulez nous contacter pour des renseignements:
+    </div>
+    <div>
+        inclure liens sociaux
+    </div>
+</div>
+<div>
+    <h1>Nous rejoindre</h1>
+    <div>
+        Si vous voulez faire partie des artistes pour la prochaine exposition, merci de lire 
+        <a href="{{path ('app_apply')}}" title='Appel à candidature'>l'appel à candidature</a>
+          puis de compléter ce formulaire : nous rejoindre (faire un formulaire qui sera envoyé en mail mais pas intégré dans base)
+    </div>
+    
+</div>
+
+{% endblock %}
