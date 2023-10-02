@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{artist.artistName}}{% endblock %}
+
+{% block body %}
+    <h1>{{artist.artistName}}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom d'artiste</th>
+                <td>{{ artist.artistName }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ artist.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ artist.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ artist.description }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ artist.email }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ artist.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Site internet</th>
+                <td>{{ artist.websiteLink }}</td>
+            </tr>
+            <tr>
+                <th>Facebook</th>
+                <td>{{ artist.facebookLink }}</td>
+            </tr>
+            <tr>
+                <th>Instagram</th>
+                <td>{{ artist.instagramLink }}</td>
+            </tr>
+            <tr>
+                <th>Catégories</th>
+                <td>{% for category in artist.categories %}
+                    {{ category.name }}
+                {% endfor %}
+                </td>
+            </tr>
+             <tr>
+                <th>Evénements participés</th>
+                <td>{% for event in artist.events %}
+                    {{ event.name }}
+                {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_artist_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier</a>
+
+    {{ include('artist/_delete_form.html.twig') }}
+{% endblock %}
