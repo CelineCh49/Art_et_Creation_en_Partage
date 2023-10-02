@@ -10,7 +10,14 @@
         {% block javascripts %}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    <div>
+            <!-- Navigation -->
+                {% include "inc/nav.html.twig" %}
+            <!-- Main Content -->
+            <div>
+                {% block body %}{% endblock %}
+            </div>
+            <!-- Footer -->
+            
+        </div>   
 </html>

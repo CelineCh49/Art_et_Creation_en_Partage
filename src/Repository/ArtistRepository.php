@@ -21,6 +21,16 @@ class ArtistRepository extends ServiceEntityRepository
         parent::__construct($registry, Artist::class);
     }
 
+
+    public function findOneByArtistName($artistName): ?Artist
+       {
+           return $this->createQueryBuilder('a')
+               ->andWhere('a.artistName = :artistName')
+               ->setParameter('artistName', $artistName)
+               ->getQuery()
+               ->getOneOrNullResult()
+           ;
+       }
 //    /**
 //     * @return Artist[] Returns an array of Artist objects
 //     */
