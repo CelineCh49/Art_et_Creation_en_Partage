@@ -2,18 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\Artist;
-use App\Entity\Event;
-use App\Entity\Image;
+use App\Entity\ArtistImage;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
-class ImageType extends AbstractType
+class ArtistImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -42,27 +38,20 @@ class ImageType extends AbstractType
                 ])
             ],
         ])
-        ->add('artist', EntityType::class,[
-            'class' => Artist::class,
-            'choice_label' => 'artistName', 
-            'label' => 'Artiste : ',
-            'placeholder' => 'Sélectionnez l\'artiste', 
-            'required' => false,
-        ])
-        ->add('event', EntityType::class,[
-            'class' => Event::class,
-            'choice_label' => 'name', 
-            'label' => 'Evénement : ',
-            'placeholder' => 'Sélectionnez l\'événement', 
-            'required' => false,
-        ])
-        ;
+        // ->add('artist', EntityType::class,[
+        //     'class' => Artist::class,
+        //     'choice_label' => 'artistName', 
+        //     'label' => 'Artiste : ',
+        //     'placeholder' => 'Sélectionnez l\'artiste', 
+        //     'required' => false,
+        // ])
+         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Image::class,
+            'data_class' => ArtistImage::class,
         ]);
     }
 }

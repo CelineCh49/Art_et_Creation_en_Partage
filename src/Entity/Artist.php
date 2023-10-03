@@ -65,17 +65,17 @@ class Artist
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'artists')]
     private Collection $categories;
 
-    #[ORM\OneToMany(mappedBy: 'artist', targetEntity: Image::class)]
-    private Collection $images;
-
     #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'artists')]
     private Collection $events;
+
+    #[ORM\OneToMany(mappedBy: 'artist', targetEntity: ArtistImage::class)]
+    private Collection $artistImages;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
-        $this->images = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->artistImages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -228,36 +228,6 @@ class Artist
     }
 
     /**
-     * @return Collection<int, Image>
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(Image $image): static
-    {
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
-            $image->setArtist($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Image $image): static
-    {
-        if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getArtist() === $this) {
-                $image->setArtist(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Event>
      */
     public function getEvents(): Collection
@@ -277,6 +247,36 @@ class Artist
     public function removeEvent(Event $event): static
     {
         $this->events->removeElement($event);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ArtistImage>
+     */
+    public function getArtistImages(): Collection
+    {
+        return $this->artistImages;
+    }
+
+    public function addArtistImage(ArtistImage $artistImage): static
+    {
+        if (!$this->artistImages->contains($artistImage)) {
+            $this->artistImages->add($artistImage);
+            $artistImage->setArtist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArtistImage(ArtistImage $artistImage): static
+    {
+        if ($this->artistImages->removeElement($artistImage)) {
+            // set the owning side to null (unless already changed)
+            if ($artistImage->getArtist() === $this) {
+                $artistImage->setArtist(null);
+            }
+        }
 
         return $this;
     }

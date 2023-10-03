@@ -2,13 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ImageRepository;
-use Doctrine\DBAL\Types\Types;
+use App\Repository\ArtistImageRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: ImageRepository::class)]
-class Image
+#[ORM\Entity(repositoryClass: ArtistImageRepository::class)]
+class ArtistImage
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,11 +16,9 @@ class Image
     #[ORM\Column(length: 255)]
     private ?string $fileName = null;
 
-    #[ORM\ManyToOne(inversedBy: 'images')]
+    #[ORM\ManyToOne(inversedBy: 'artistImages')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Artist $artist = null;
-
-    #[ORM\ManyToOne(inversedBy: 'images')]
-    private ?Event $event = null;
 
     public function getId(): ?int
     {
@@ -49,18 +45,6 @@ class Image
     public function setArtist(?Artist $artist): static
     {
         $this->artist = $artist;
-
-        return $this;
-    }
-
-    public function getEvent(): ?Event
-    {
-        return $this->event;
-    }
-
-    public function setEvent(?Event $event): static
-    {
-        $this->event = $event;
 
         return $this;
     }

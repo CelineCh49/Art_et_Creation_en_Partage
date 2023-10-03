@@ -13,16 +13,19 @@ class FileUploader
     ) {
     }
 
-    public function upload(UploadedFile $file): string
+    public function upload(UploadedFile $file, string $uploadDirectory): string
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);
         $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
 
         try {
-            $file->move($this->getTargetDirectory(), $fileName);
+            $file->move($this->getTargetDirectory().'/'.$uploadDirectory, $fileName);
         } catch (FileException $e) {
-            // ... handle exception if something happens during file upload // TODO: gérer cette exception
+            echo "Une erreur s'est produite lors du téléchargement du fichier.";
+           // Redirection vers une page d'erreur ou une autre action appropriée
+            // header("Location: erreur.php");
+            // exit;
         }
 
         return $fileName;
