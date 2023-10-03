@@ -16,7 +16,6 @@ class Image
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Le nom du fichier est obligatoire')]
     private ?string $fileName = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]

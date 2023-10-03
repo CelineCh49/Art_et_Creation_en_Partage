@@ -57,6 +57,13 @@
                 {% endfor %}
                 </td>
             </tr>
+             <tr>
+                <th>Images</th>
+                <td>{% for image in artist.images %}
+                <img src="{{asset('assets/uploads/'~image.filename)}}" alt="{{ image.fileName }}">
+                {% endfor %}
+                </td>
+            </tr>
         </tbody>
     </table>
 
