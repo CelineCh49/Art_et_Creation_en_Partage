@@ -20,12 +20,6 @@ class ImageType extends AbstractType
             'label' => 'Nom du fichier : ', 
             'required' => true,
         ])
-        ->add('title', TextType::class,[
-            'label' => 'Titre de l\'image : ', 
-        ])
-        ->add('description', TextType::class,[
-            'label' => 'Description de l\'image : ', 
-        ])
         ->add('artist', EntityType::class,[
             'class' => Artist::class,
             'choice_label' => 'artistName', 

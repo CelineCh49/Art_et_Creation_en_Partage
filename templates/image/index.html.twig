@@ -10,8 +10,6 @@
             <tr>
                 <th>Id</th>
                 <th>FileName</th>
-                <th>Title</th>
-                <th>Description</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,8 +18,6 @@
             <tr>
                 <td>{{ image.id }}</td>
                 <td>{{ image.fileName }}</td>
-                <td>{{ image.title }}</td>
-                <td>{{ image.description }}</td>
                 <td>
                     <a href="{{ path('app_image_show', {'id': image.id}) }}">show</a>
                     <a href="{{ path('app_image_edit', {'id': image.id}) }}">edit</a>

@@ -19,12 +19,6 @@ class Image
     #[Assert\NotBlank(message: 'Le nom du fichier est obligatoire')]
     private ?string $fileName = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $title = null;
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
-
     #[ORM\ManyToOne(inversedBy: 'images')]
     private ?Artist $artist = null;
 
@@ -44,30 +38,6 @@ class Image
     public function setFileName(string $fileName): static
     {
         $this->fileName = $fileName;
-
-        return $this;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(?string $title): static
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): static
-    {
-        $this->description = $description;
 
         return $this;
     }
