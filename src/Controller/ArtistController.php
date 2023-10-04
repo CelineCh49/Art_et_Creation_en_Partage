@@ -121,6 +121,7 @@ class ArtistController extends AbstractController
              $artistImage = new ArtistImage();
              $artistImage->setFileName($file);
              $artist->addArtistImage($artistImage);
+             $this->addFlash('success', 'La photo a été ajoutée avec succès.');
              }
 
             $entityManager->flush();
@@ -161,6 +162,7 @@ class ArtistController extends AbstractController
                 //delete in the database
                 $entityManager->remove($artistImage);
                 $entityManager->flush();
+                $this->addFlash('success', 'L\'image a été supprimée avec succès.');
 
                 // Get the URL of the page that called this method (edit page)
                 $referer = $requestStack->getCurrentRequest()->headers->get('referer');
