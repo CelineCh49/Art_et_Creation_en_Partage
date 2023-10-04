@@ -68,7 +68,7 @@ class Artist
     #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'artists')]
     private Collection $events;
 
-    #[ORM\OneToMany(mappedBy: 'artist', targetEntity: ArtistImage::class)]
+    #[ORM\OneToMany(mappedBy: 'artist', targetEntity: ArtistImage::class, cascade: ['persist'])]
     private Collection $artistImages;
 
     public function __construct()
