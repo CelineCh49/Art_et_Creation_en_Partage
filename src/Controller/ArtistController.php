@@ -33,6 +33,9 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
  
         if ($form->isSubmitted() && $form->isValid()) {
+            $name= $form->get('artistName')->getData();
+            $upperName = mb_strtoupper($name, 'UTF-8');
+            $artist->setArtistName($upperName);
 
             // //Get images uploaded
             // $images=$form->get('images')->getData();
@@ -99,6 +102,9 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $name= $form->get('artistName')->getData();
+            $upperName = mb_strtoupper($name, 'UTF-8');
+            $artist->setArtistName($upperName);
              //Get images uploaded
              $image=$form->get('images')->getData();
              //return a string: temporary filename in the file Temp of the App
