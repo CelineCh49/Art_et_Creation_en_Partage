@@ -11,7 +11,7 @@
 
 		{% for image in event.eventImages %}
 			<div>
-				<img src="{{asset('assets/uploads/event_img/'~ image.fileName)}}" alt="Image {{image.fileName}}" width="150">
+				<img src="{{asset('assets/uploads/event_img/'~ image.fileName)}}" alt="Image {{image.fileName}}" height="150">
 				{{ include('event/_delete_image_form.html.twig') }}
 				{# <a href="{{path('app_artist_delete_image', {'id':image.id}) }}"
 				            data-delete data-token = "{{ csrf_token('delete'~ image.id) }}">Supprimer</a> #}

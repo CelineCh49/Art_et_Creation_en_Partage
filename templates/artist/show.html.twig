@@ -53,14 +53,14 @@
              <tr>
                 <th>Evénements participés</th>
                 <td>{% for event in artist.events %}
-                    {{ event.name }}
+                    <a href="{{ path('app_event_show', {'id': event.id}) }}">{{ event.name }}</a>
                 {% endfor %}
                 </td>
             </tr>
              <tr>
                 <th>Images</th>
                 <td>{% for image in artist.artistImages %}
-                <img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="{{image.fileName}}" width="300">
+                <img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="{{image.fileName}}" height="150">
                 {% endfor %}
                 </td>
             </tr>
