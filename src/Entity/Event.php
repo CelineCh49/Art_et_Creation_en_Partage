@@ -54,9 +54,13 @@ class Event
     #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'events')] 
     private Collection $artists;
 
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: EventImage::class, orphanRemoval: true)]
+    private Collection $eventImages;
+
     public function __construct()
     {
         $this->artists = new ArrayCollection();
+        $this->eventImages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -182,6 +186,36 @@ class Event
     {
         if ($this->artists->removeElement($artist)) {
             $artist->removeEvent($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EventImage>
+     */
+    public function getEventImages(): Collection
+    {
+        return $this->eventImages;
+    }
+
+    public function addEventImage(EventImage $eventImage): static
+    {
+        if (!$this->eventImages->contains($eventImage)) {
+            $this->eventImages->add($eventImage);
+            $eventImage->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventImage(EventImage $eventImage): static
+    {
+        if ($this->eventImages->removeElement($eventImage)) {
+            // set the owning side to null (unless already changed)
+            if ($eventImage->getEvent() === $this) {
+                $eventImage->setEvent(null);
+            }
         }
 
         return $this;
