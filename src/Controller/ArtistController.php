@@ -34,7 +34,7 @@ class ArtistController extends AbstractController
  
         if ($form->isSubmitted() && $form->isValid()) {
             $name= $form->get('artistName')->getData();
-            $upperName = mb_strtoupper($name, 'UTF-8');
+            $upperName = mb_strtoupper($name, 'UTF-8'); //Uppercase and accent
             $artist->setArtistName($upperName);
 
             // //Get images uploaded

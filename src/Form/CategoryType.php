@@ -17,16 +17,7 @@ class CategoryType extends AbstractType
         ->add('name',TextType::class,[
             'label'=> 'Nom de la catégorie : ',
             'required' => true,
-        ])
-            // ->add('artists', EntityType::class,[
-            //     'class' => Artist::class,
-            //     'choice_label' => 'artistName', 
-            //     'label' => 'Artistes de cette catégorie',
-            //     'placeholder' => 'Sélectionnez un ou plusieurs artistes', 
-            //     'multiple' => true, // Enable multiple selections
-            //     'required' => false, 
-            // ])
-        ;
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

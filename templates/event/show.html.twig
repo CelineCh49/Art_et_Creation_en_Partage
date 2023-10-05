@@ -43,7 +43,7 @@
                 <th>Artistes</th>
                 <td>
                 {% for artist in event.artists %}
-                    {{ artist.artistName }}
+                   <a href="{{ path('app_artist_show', {'id': artist.id}) }}">{{ artist.artistName }}</a> 
                 {% endfor %}  
                 </td>
             </tr>

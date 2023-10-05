@@ -46,7 +46,7 @@
             <tr>
                 <th>Catégories</th>
                 <td>{% for category in artist.categories %}
-                    {{ category.name }}
+                     <a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.name }}</a> 
                 {% endfor %}
                 </td>
             </tr>
