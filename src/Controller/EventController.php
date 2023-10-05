@@ -63,33 +63,65 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_event_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Event $event, EntityManagerInterface $entityManager, ArtistRepository $artistRepository): Response
+    public function edit(Request $request, Event $event, EntityManagerInterface $entityManager, ArtistRepository $artistRepository, EventRepository $eventRepository): Response
     {
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $formArtists=$form->get('artists')->getData();
+        //    $formArtists=$form->get('artists')->getData();
            
             //Add an artist
-            foreach ($formArtists as $formArtist) {     
-                $formArtistName=$formArtist->getArtistName();
-                $artist = $artistRepository->findOneByArtistName($formArtistName);
-                $artist->addEvent($event);
-                $entityManager->persist($artist);
-            }
+            // foreach ($formArtists as $formArtist) {     
+            //     $formArtistName=$formArtist->getArtistName();
+            //     $artist = $artistRepository->findOneByArtistName($formArtistName);
+            //     $artist->addEvent($event);
+            //     $entityManager->persist($artist);
+            // }
 
-            //Remove an artist
-            $artistList = $event->getArtists(); 
-            foreach ($artistList as $artist){
-                if (!$formArtists->contains($artist)){
-                    $artist->removeEvent($event);
-                    $event->removeArtist($artist);
-                    $entityManager->persist($artist);
-                    $entityManager->persist($event);
-                }
-                }
+            // foreach ($formArtists as $formArtist){
+            //     $eventArtists= $event->getArtists();
+            //     if (!$eventArtists->contains($formArtist)){
+            //         $event->addArtist($formArtist); 
+            //         $entityManager->persist($event);
+            //     }
+                
+            // }
+           
 
+            // //Remove an artist  //TODO: suppression des artistes impossible
+            // $artistList = $event->getArtists(); 
+            // foreach ($artistList as $artist){
+            //     if (!$formArtists->contains($artist)){
+            //         $artist->removeEvent($event);
+            //         $event->removeArtist($artist);
+            //         $entityManager->persist($artist);
+            //         $entityManager->persist($event);
+            //     }
+            //     }
+                 
+                //chercher tous les artistes de l'event $artistsfromThisevent = findAllArtistsFromThisEvent 
+                // $allArtistsFromThisEvent = $eventRepository->findAllArtistsFromThisEvent($event);
+                // foreach ($formArtists as $formArtist){
+                //     if(!$allArtistsFromThisEvent->contains($formArtist)){
+                //         $event->addArtist($formArtist);
+                //     }
+                //     $entityManager->persist($event);
+                // }
+                // foreach ($allArtistsFromThisEvent as $ArtistFromThisEvent ){
+                //     if(!$formArtists->contains($ArtistFromThisEvent)){
+                //         $event->removeArtist($ArtistFromThisEvent);
+                //     }
+                //     $entityManager->persist($event);
+                // }
+                
+                //if artistsfromThisevent n'est pas dans la list des artistes du getData(); 
+                //foreach $artist in $artistsfromThisevent
+                //$artist->remove($event);
+
+
+               
+            $entityManager->persist($event);       
             $entityManager->flush();
 
             return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);

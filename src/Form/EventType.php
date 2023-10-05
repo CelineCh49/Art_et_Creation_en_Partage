@@ -75,6 +75,7 @@ class EventType extends AbstractType
                 'placeholder' => 'Sélectionnez les artistes', 
                 'multiple' => true, // Enable multiple selections
                 'required' => false,
+                'by_reference' => false, // Important for changes to be applied
             ])
         ;
     }

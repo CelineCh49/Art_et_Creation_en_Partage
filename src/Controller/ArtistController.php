@@ -76,7 +76,7 @@ class ArtistController extends AbstractController
 
             $entityManager->persist($artist);
             $entityManager->flush();
-            
+            $this->addFlash('success', 'L\'artiste a été ajouté avec succès.');
 
             return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -146,6 +146,7 @@ class ArtistController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$artist->getId(), $request->request->get('_token'))) {
             $entityManager->remove($artist);
             $entityManager->flush();
+            $this->addFlash('success', 'L\'artiste a été supprimé avec succès.');
         }
 
         return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);

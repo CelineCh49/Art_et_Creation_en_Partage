@@ -51,7 +51,7 @@ class Event
     #[Assert\Url(message : "Veuillez saisir une URL valide commençant par http:// ou https://" )]
     private ?string $instagramLink = null;
 
-    #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'events')]
+    #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'events')] 
     private Collection $artists;
 
     public function __construct()

@@ -91,7 +91,7 @@ class ArtistType extends AbstractType
                 'required' => false, 
             ])
             ->add('images', FileType::class, [
-                'label' => 'Télécharger une image (jpeg, png, webp - taille max: 1024K) ',
+                'label' => 'Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Modifier" ',
     
                 // unmapped means that this field is not associated to any entity property
                 //So we can handle images ourself in ArtistController

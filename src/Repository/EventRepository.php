@@ -21,6 +21,17 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    // public function findAllArtistsFromThisEvent(Event $event)
+    // {
+    //     return $this->createQueryBuilder('e')
+    //         ->select('a')
+    //         ->join('e.artists', 'a')
+    //         ->where('e = :event')
+    //         ->setParameter('event', $event)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
 //    /**
 //     * @return Event[] Returns an array of Event objects
 //     */
