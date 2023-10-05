@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     images_directory: '%kernel.project_dir%/public/assets/uploads/artist_img'
+    event_images_directory: '%kernel.project_dir%/public/assets/uploads/event_img'
 
 services:
     # default configuration for services in *this* file
@@ -21,9 +22,9 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\Service\FileUploader:
-        arguments:
-            $targetDirectory: '%images_directory%'
+    # App\Service\FileUploader:
+    #     arguments:
+    #         $targetDirectory: '%images_directory%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

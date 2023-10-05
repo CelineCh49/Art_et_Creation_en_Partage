@@ -47,6 +47,13 @@
                 {% endfor %}  
                 </td>
             </tr>
+             <tr>
+                <th>Images</th>
+                <td>{% for image in event.eventImages %}
+                <img src="{{asset('assets/uploads/event_img/'~ image.fileName)}}" alt="{{image.fileName}}" width="300">
+                {% endfor %}
+                </td>
+            </tr>
         </tbody>
     </table>
 

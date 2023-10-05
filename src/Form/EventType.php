@@ -9,8 +9,10 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class EventType extends AbstractType
 {
@@ -76,6 +78,33 @@ class EventType extends AbstractType
                 'multiple' => true, // Enable multiple selections
                 'required' => false,
                 'by_reference' => false, // Important for changes to be applied
+            ])
+            ->add('images', FileType::class, [
+                'label' => 'Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Modifier" ',
+    
+                // unmapped means that this field is not associated to any entity property
+                //So we can handle images ourself in ArtistController
+               'mapped' => false,
+    
+                // make it optional so you don't have to re-upload the PDF file
+                // every time you edit the Product details
+                'required' => false,
+
+              //  'multiple'=>true,
+                  
+                // unmapped fields can't define their validation using annotations
+                // in the associated entity, so you can use the PHP constraint classes
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/webp',
+                        ],
+                        'mimeTypesMessage' => 'Merci de télécharger une image au format valide',
+                    ])
+                ],
             ])
         ;
     }

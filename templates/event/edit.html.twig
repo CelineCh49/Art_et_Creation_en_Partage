@@ -7,7 +7,21 @@
 
     {{ include('event/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_event_index') }}">Retour à la liste</a>
+    	<div>Toutes les photos de l'événement:</div>
+
+		{% for image in event.eventImages %}
+			<div>
+				<img src="{{asset('assets/uploads/event_img/'~ image.fileName)}}" alt="Image {{image.fileName}}" width="150">
+				{{ include('event/_delete_image_form.html.twig') }}
+				{# <a href="{{path('app_artist_delete_image', {'id':image.id}) }}"
+				            data-delete data-token = "{{ csrf_token('delete'~ image.id) }}">Supprimer</a> #}
+			</div>
+		{% endfor %}
+
+		<a href="{{ path('app_event_show', {'id': event.id}) }}">Retour sur l'événement</a>
+
+
+    <a href="{{ path('app_event_index') }}">Voir tous les événements</a>
 
     {{ include('event/_delete_form.html.twig') }}
 {% endblock %}

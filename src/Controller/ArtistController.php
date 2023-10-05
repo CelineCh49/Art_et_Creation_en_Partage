@@ -8,7 +8,6 @@ use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,15 +30,15 @@ class ArtistController extends AbstractController
         $artist = new Artist();
         $form = $this->createForm(ArtistType::class, $artist);
         $form->handleRequest($request);
- 
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $name= $form->get('artistName')->getData();
+            $name = $form->get('artistName')->getData();
             $upperName = mb_strtoupper($name, 'UTF-8'); //Uppercase and accent
             $artist->setArtistName($upperName);
 
             // //Get images uploaded
             // $images=$form->get('images')->getData();
-           
+
             // //Loop images
             //     //Generate a new unique filename
             //     foreach($images as $image){
@@ -55,14 +54,14 @@ class ArtistController extends AbstractController
             //     $artist->addArtistImage($artistImage);
 
             //     }
-
-                 //Get images uploaded
-                $image=$form->get('images')->getData();
-                //return a string: temporary filename in the file Temp of the App
-                if($image){
+            //Images Management
+            //Get images uploaded
+            $image = $form->get('images')->getData();
+            //return a string: temporary filename in the file Temp of the App
+            if ($image) {
                 //Generate a new unique filename
-                $file = md5(uniqid()).'.'.$image->guessExtension();
-                
+                $file = md5(uniqid()) . '.' . $image->guessExtension();
+
                 //copy the file in uploads directory
                 $image->move(
                     $this->getParameter('images_directory'),
@@ -72,7 +71,7 @@ class ArtistController extends AbstractController
                 $artistImage = new ArtistImage();
                 $artistImage->setFileName($file);
                 $artist->addArtistImage($artistImage);
-                }
+            }
 
             $entityManager->persist($artist);
             $entityManager->flush();
@@ -102,36 +101,38 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $name= $form->get('artistName')->getData();
+            $name = $form->get('artistName')->getData();
             $upperName = mb_strtoupper($name, 'UTF-8');
             $artist->setArtistName($upperName);
-             //Get images uploaded
-             $image=$form->get('images')->getData();
-             //return a string: temporary filename in the file Temp of the App
-             if($image){
-             //Generate a new unique filename
-             $file = md5(uniqid()).'.'.$image->guessExtension();
-             
-             //copy the file in uploads directory
-             $image->move(
-                 $this->getParameter('images_directory'),
-                 $file
-             );
-             //Stock image in database
-             $artistImage = new ArtistImage();
-             $artistImage->setFileName($file);
-             $artist->addArtistImage($artistImage);
-             $this->addFlash('success', 'La photo a été ajoutée avec succès.');
-             }
+            //Get images uploaded
+            $image = $form->get('images')->getData();
+            //return a string: temporary filename in the file Temp of the App
+            if ($image) {
+                //Generate a new unique filename
+                $file = md5(uniqid()) . '.' . $image->guessExtension();
 
+                //copy the file in uploads directory
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $file
+                );
+                //Stock image in database
+                $artistImage = new ArtistImage();
+                $artistImage->setFileName($file);
+                $artist->addArtistImage($artistImage);
+                $entityManager->persist($artist);
+                $this->addFlash('success', 'La photo a été ajoutée avec succès.');
+            }
+
+            $entityManager->persist($artist);
             $entityManager->flush();
 
             $this->addFlash('success', 'L\'artiste a été modifié avec succès.');
 
-           return $this->render('artist/edit.html.twig', [
-            'artist' => $artist,
-            'form' => $form,
-        ]);
+            return $this->render('artist/edit.html.twig', [
+                'artist' => $artist,
+                'form' => $form,
+            ]);
         }
 
         return $this->render('artist/edit.html.twig', [
@@ -143,7 +144,7 @@ class ArtistController extends AbstractController
     #[Route('/{id}', name: 'app_artist_delete', methods: ['POST'])]
     public function delete(Request $request, Artist $artist, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$artist->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $artist->getId(), $request->request->get('_token'))) {
             $entityManager->remove($artist);
             $entityManager->flush();
             $this->addFlash('success', 'L\'artiste a été supprimé avec succès.');
@@ -153,13 +154,13 @@ class ArtistController extends AbstractController
     }
 
     #[Route('/supprimer/image/{id}', name: 'app_artist_delete_image', methods: ['POST'])]
-    public function deleteArtistImage(ArtistImage $artistImage, Request $request, EntityManagerInterface $entityManager, RequestStack $requestStack){
-        {
-            if ($this->isCsrfTokenValid('delete'.$artistImage->getId(), $request->request->get('_token'))) {
+    public function deleteArtistImage(ArtistImage $artistImage, Request $request, EntityManagerInterface $entityManager, RequestStack $requestStack)
+    { {
+            if ($this->isCsrfTokenValid('delete' . $artistImage->getId(), $request->request->get('_token'))) {
                 //Get image name
-                $name=$artistImage->getFileName();
+                $name = $artistImage->getFileName();
                 //delete the file in the directory
-                unlink($this->getParameter('images_directory').'/'.$name);
+                unlink($this->getParameter('images_directory') . '/' . $name);
                 //delete in the database
                 $entityManager->remove($artistImage);
                 $entityManager->flush();
@@ -167,11 +168,11 @@ class ArtistController extends AbstractController
 
                 // Get the URL of the page that called this method (edit page)
                 $referer = $requestStack->getCurrentRequest()->headers->get('referer');
-        
+
                 // Redirect back to the edit page
                 return $this->redirect($referer);
             }
-    
+
             return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -180,7 +181,7 @@ class ArtistController extends AbstractController
 
         // //AJAX request
         // $data = json_decode($request->getContent(),true); // true: to get column name
-        
+
         // //check if token is valid
         // if ($this->isCsrfTokenValid('delete'.$artistImage->getId(), $data['_token'])){//token name : 'deleteId'
         //    //Get image name
