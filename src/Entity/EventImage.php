@@ -13,7 +13,7 @@ class EventImage
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255)] //TODO: rajouter un not Blank?
     private ?string $fileName = null;
 
     #[ORM\ManyToOne(inversedBy: 'eventImages')]

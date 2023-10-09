@@ -44,7 +44,7 @@ class Artist
     private ?string $email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Regex(pattern: '/^0[1-9]([-. ]?[0-9]{2}){4}$/')] // for french phone format only  //TODO: changer le regex pour l'international
+    #[Assert\Regex(pattern: '/^\+[0-9]+([-. ]?[0-9]+)+$/')] // for international format //TODO: vérifier le regex pour l'international
     private ?string $telephone = null;
 
     #[ORM\Column(length: 255, nullable: true)]
