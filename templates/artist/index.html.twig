@@ -5,6 +5,11 @@
 {% block body %}
     <h1>Liste des artistes</h1>
 
+<div>
+    {% include 'artist/_filter.html.twig' %}
+</div>
+
+<div>
     <table class="table">
         <thead>
             <tr>
@@ -12,6 +17,7 @@
                 <th>Prénom</th>
                 <th>Nom</th>
                 <th>Description</th>
+                <th>Catégories</th>
                 <th>Email</th>
                 <th>Téléphone</th>
                 <th>Site internet</th>
@@ -27,6 +33,10 @@
                 <td>{{ artist.firstName }}</td>
                 <td>{{ artist.lastName }}</td>
                 <td>{{ artist.description }}</td>
+                <td>{% for category in artist.categories %}
+                    {{category.name}}
+                {% endfor %}
+                </td>
                 <td>{{ artist.email }}</td>
                 <td>{{ artist.telephone }}</td>
                 <td>{{ artist.websiteLink }}</td>
@@ -44,6 +54,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
     <a href="{{ path('app_artist_new') }}">Créer une fiche Artiste</a>
 {% endblock %}

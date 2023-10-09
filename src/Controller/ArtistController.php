@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Artist;
 use App\Entity\ArtistImage;
+use App\Filter\SearchData;
+use App\Form\ArtistFilterForm;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,10 +19,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArtistController extends AbstractController
 {
     #[Route('/', name: 'app_artist_index', methods: ['GET'])]
-    public function index(ArtistRepository $artistRepository): Response
+    public function index(ArtistRepository $artistRepository, Request $request): Response
     {
+        $data = new SearchData();
+        $form= $this->createForm(ArtistFilterForm::class, $data);
+        $form->handleRequest($request);
+        $artists = $artistRepository->findSearch($data);
         return $this->render('artist/index.html.twig', [
-            'artists' => $artistRepository->findAll(),
+            'artists' => $artists,
+            'form' => $form->createView()
         ]);
     }
 
