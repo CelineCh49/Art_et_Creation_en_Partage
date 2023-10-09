@@ -45,7 +45,7 @@ class ArtistController extends AbstractController
             //     $file = md5(uniqid()).'.'.$image->guessExtension();
             //     //copy the file in uploads directory
             //     $image->move(
-            //         $this->getParameter('images_directory'),
+            //         $this->getParameter('artist_images_directory'),
             //         $file
             //     );
             //     //Stock image in database
@@ -65,7 +65,7 @@ class ArtistController extends AbstractController
 
                 //copy the file in uploads directory
                 $favoriteImage->move(
-                    $this->getParameter('images_directory'),
+                    $this->getParameter('artist_images_directory'),
                     $file
                 );
                 //Stock image in database
@@ -86,7 +86,7 @@ class ArtistController extends AbstractController
 
                 //copy the file in uploads directory
                 $image->move(
-                    $this->getParameter('images_directory'),
+                    $this->getParameter('artist_images_directory'),
                     $file
                 );
                 //Stock image in database
@@ -137,7 +137,7 @@ class ArtistController extends AbstractController
 
                 //copy the file in uploads directory
                 $favoriteImage->move(
-                    $this->getParameter('images_directory'),
+                    $this->getParameter('artist_images_directory'),
                     $file
                 );
                 //Stock image in database
@@ -153,7 +153,7 @@ class ArtistController extends AbstractController
 
                 //copy the file in uploads directory
                 $image->move(
-                    $this->getParameter('images_directory'),
+                    $this->getParameter('artist_images_directory'),
                     $file
                 );
                 //Stock image in database
@@ -200,7 +200,7 @@ class ArtistController extends AbstractController
                 //Get image name
                 $name = $artistImage->getFileName();
                 //delete the file in the directory
-                unlink($this->getParameter('images_directory') . '/' . $name);
+                unlink($this->getParameter('artist_images_directory') . '/' . $name);
                 //delete in the database
                 $entityManager->remove($artistImage);
                 $entityManager->flush();
@@ -227,7 +227,7 @@ class ArtistController extends AbstractController
         //    //Get image name
         //     $name=$artistImage->getFileName();
         //     //delete the file in the directory
-        //     unlink($this->getParameter('images_directory').'/'.$name);
+        //     unlink($this->getParameter('artist_images_directory').'/'.$name);
         //     //delete in the database
         //     $entityManager->remove($artistImage);
         //     $entityManager->flush();
