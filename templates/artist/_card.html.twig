@@ -1,0 +1,15 @@
+<div class="card">
+<a href="{{path ('app_artist_show', {'id':artist.id})}}" title='{{artist.artistName}}'>
+    <img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite" height="150">
+    <div class="card-body">
+        <h5>{{ artist.artistName }}</h5>
+        <div>
+            {% for category in artist.categories %}
+            {{ category.name }}
+            {% endfor %}
+        </div>
+        <div>
+            {{artist.description}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="card">
+<a href="{{path ('app_event_show', {'id':event.id})}}" title='{{event.name}}'>
+    <img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" height="150">
+    <div class="card-body">
+        <div>
+            Du {{ event.openingDate|date('d/m/Y')}} au {{ event.closingDate|date('d/m/Y')}}
+        </div>
+        <h5>{{ event.name }}</h5>
+        <div>
+            {{event.description}}
+        </div>
+    </div>
+</div>

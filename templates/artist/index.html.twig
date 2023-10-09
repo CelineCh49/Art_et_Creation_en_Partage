@@ -10,7 +10,7 @@
 </div>
 
 <div>
-    <table class="table">
+    {# <table class="table">
         <thead>
             <tr>
                 <th>Nom d'artiste</th>
@@ -26,9 +26,9 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody> #}
         {% for artist in artists %}
-            <tr>
+            {# <tr>
                 <td>{{ artist.artistName }}</td>
                 <td>{{ artist.firstName }}</td>
                 <td>{{ artist.lastName }}</td>
@@ -46,7 +46,10 @@
                     <a href="{{ path('app_artist_show', {'id': artist.id}) }}">Afficher</a>
                     <a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier</a>
                 </td>
-            </tr>
+            </tr> #}
+            {% include 'artist/_card.html.twig'%}
+            <a href="{{ path('app_artist_show', {'id': artist.id}) }}">Afficher</a>
+            <a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier</a>
         {% else %}
             <tr>
                 <td colspan="11">Aucun artiste trouvé</td>

@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Liste des événements</h1>
 
-    <table class="table">
+    {# <table class="table">
         <thead>
             <tr>
                 <th>Nom</th>
@@ -19,9 +19,9 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody> #}
         {% for event in events %}
-            <tr>
+            {# <tr>
                 <td>{{ event.name }}</td>
                 <td>{{ event.openingDate|date('d/m/Y')}}</td>
                 <td>{{ event.closingDate|date('d/m/Y')}}</td>
@@ -34,7 +34,10 @@
                     <a href="{{ path('app_event_show', {'id': event.id}) }}">Afficher</a>
                     <a href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
                 </td>
-            </tr>
+            </tr> #}
+            {% include 'event/_card.html.twig'%}
+            <a href="{{ path('app_event_show', {'id': event.id}) }}">Afficher</a>
+            <a href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
         {% else %}
             <tr>
                 <td colspan="10">Aucun événement trouvé</td>

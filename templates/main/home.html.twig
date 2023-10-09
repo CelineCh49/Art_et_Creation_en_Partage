@@ -16,9 +16,10 @@
 <h1> Nos événements</h1>
  
    {% for event in events %}
-       <a href="{{path ('app_event_show', {'id':event.id})}}" title='Aller à {{event.name}}'>
+      {% include 'event/_card.html.twig'%}
+       {# <a href="{{path ('app_event_show', {'id':event.id})}}" title='Aller à {{event.name}}'>
        <img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" height="150">
-       {{event.name}}</a> 
+       {{event.name}}</a>  #}
     {% endfor %} 
      <a href="{{path ('app_event_index')}}" title='Voir tous les événements'>Tous nos événements</a>
 </div>
@@ -26,9 +27,10 @@
 <h1> Nos artistes</h1>
  
    {% for artist in artists %}
-       <a href="{{path ('app_artist_show', {'id':artist.id})}}" title='{{artist.artistName}}'>
+      {% include 'artist/_card.html.twig'%}
+       {# <a href="{{path ('app_artist_show', {'id':artist.id})}}" title='{{artist.artistName}}'>
        <img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite" height="150">
-       {{artist.artistName}}</a> 
+       {{artist.artistName}}</a>  #}
     {% endfor %} 
      <a href="{{path ('app_artist_index')}}" title='Voir tous les artistes'>Tous les artistes</a>
 </div>
