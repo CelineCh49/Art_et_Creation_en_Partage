@@ -90,6 +90,22 @@ class ArtistType extends AbstractType
                 'multiple' => true, // Enable multiple selections
                 'required' => false, 
             ])
+            ->add('favoriteImage', FileType::class, [
+                'label' => 'Image favorite: ',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/webp',
+                        ],
+                        'mimeTypesMessage' => 'Merci de télécharger une image au format valide',
+                    ])
+                ],
+            ])
             ->add('images', FileType::class, [
                 'label' => 'Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Modifier" ',
     

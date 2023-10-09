@@ -12,6 +12,10 @@
                 <td>{{ event.name }}</td>
             </tr>
             <tr>
+                <th>Image favorite</th>
+                <td><img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" height="150"></td>
+            </tr>
+            <tr>
                 <th>Date d'ouverture</th>
                 <td>{{ event.openingDate|date('d/m/Y')  }}</td>
             </tr>
@@ -43,7 +47,9 @@
                 <th>Artistes</th>
                 <td>
                 {% for artist in event.artists %}
-                   <a href="{{ path('app_artist_show', {'id': artist.id}) }}">{{ artist.artistName }}</a> 
+                   <a href="{{ path('app_artist_show', {'id': artist.id}) }}">
+                    <img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite" height="150">
+                    {{ artist.artistName }}</a> 
                 {% endfor %}  
                 </td>
             </tr>

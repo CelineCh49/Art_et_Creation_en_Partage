@@ -7,6 +7,10 @@
 
     {{ include('event/_form.html.twig', {'button_label': 'Modifier'}) }}
 
+		<div>Photo mise en avant:
+		<img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite " height="150">
+		</div>
+
     	<div>Toutes les photos de l'événement:</div>
 
 		{% for image in event.eventImages %}

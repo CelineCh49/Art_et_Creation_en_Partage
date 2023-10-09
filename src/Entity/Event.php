@@ -57,6 +57,9 @@ class Event
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: EventImage::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $eventImages;
 
+    #[ORM\Column(length: 255)] 
+    private ?string $favoriteImage = null;
+
     public function __construct()
     {
         $this->artists = new ArrayCollection();
@@ -218,6 +221,17 @@ class Event
             }
         }
 
+        return $this;
+    }
+
+    public function getFavoriteImage(): ?string
+    {
+        return $this->favoriteImage;
+    }
+
+    public function setFavoriteImage(string $favoriteImage): static
+    {
+        $this->favoriteImage = $favoriteImage;
         return $this;
     }
 

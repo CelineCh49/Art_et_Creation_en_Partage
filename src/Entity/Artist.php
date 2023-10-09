@@ -44,7 +44,7 @@ class Artist
     private ?string $email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Regex(pattern: '/^\+[0-9]+([-. ]?[0-9]+)+$/')] // for international format //TODO: vérifier le regex pour l'international
+    #[Assert\Regex(pattern:  '/^0[1-9]([-. ]?[0-9]{2}){4}$/')] // for french format //TODO: changer pour  le regex pour l'international
     private ?string $telephone = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -70,6 +70,9 @@ class Artist
 
     #[ORM\OneToMany(mappedBy: 'artist', targetEntity: ArtistImage::class, cascade: ['persist', 'remove'])]
     private Collection $artistImages;
+
+    #[ORM\Column(length: 255)] 
+    private ?string $favoriteImage = null;
 
     public function __construct()
     {
@@ -277,6 +280,18 @@ class Artist
                 $artistImage->setArtist(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFavoriteImage(): ?string
+    {
+        return $this->favoriteImage;
+    }
+
+    public function setFavoriteImage(string $favoriteImage): static
+    {
+        $this->favoriteImage = $favoriteImage;
 
         return $this;
     }

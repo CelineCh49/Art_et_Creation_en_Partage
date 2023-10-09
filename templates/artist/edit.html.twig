@@ -8,7 +8,10 @@
 
 	{{ include('artist/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-	
+		<div>Photo mise en avant:
+		<img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite " height="150">
+		</div>
+
 		<div>Toutes mes photos:</div>
 
 		{% for image in artist.artistImages %}

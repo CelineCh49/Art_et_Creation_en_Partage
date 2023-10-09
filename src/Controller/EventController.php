@@ -34,6 +34,27 @@ class EventController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            //Favorite Image
+            //Get images uploaded
+            $favoriteImage = $form->get('favoriteImage')->getData();
+            //return a string: temporary filename in the file Temp of the App
+            if ($favoriteImage) {
+                //Generate a new unique filename
+                $file = md5(uniqid()) . '.' . $favoriteImage->guessExtension();
+
+                //copy the file in uploads directory
+                $favoriteImage->move(
+                    $this->getParameter('event_images_directory'),
+                    $file
+                );
+                //Stock image in database
+                $event->setFavoriteImage($file);
+            }else{
+                // default image
+                $defaultImage = 'default.png'; 
+                $event->setFavoriteImage($defaultImage);
+            }
+
             //Images Management
             //Get images uploaded
             $image = $form->get('images')->getData();
@@ -92,6 +113,23 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+             //Favorite Image
+            //Get images uploaded
+            $favoriteImage = $form->get('favoriteImage')->getData();
+            //return a string: temporary filename in the file Temp of the App
+            if ($favoriteImage) {
+                //Generate a new unique filename
+                $file = md5(uniqid()) . '.' . $favoriteImage->guessExtension();
+
+                //copy the file in uploads directory
+                $favoriteImage->move(
+                    $this->getParameter('event_images_directory'),
+                    $file
+                );
+                //Stock image in database
+                $event->setFavoriteImage($file);
+            }
 
             //    $formArtists=$form->get('artists')->getData();
 

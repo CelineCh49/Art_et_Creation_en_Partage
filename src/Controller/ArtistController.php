@@ -54,6 +54,28 @@ class ArtistController extends AbstractController
             //     $artist->addArtistImage($artistImage);
 
             //     }
+
+            //Favorite Image
+            //Get images uploaded
+            $favoriteImage = $form->get('favoriteImage')->getData();
+            //return a string: temporary filename in the file Temp of the App
+            if ($favoriteImage) {
+                //Generate a new unique filename
+                $file = md5(uniqid()) . '.' . $favoriteImage->guessExtension();
+
+                //copy the file in uploads directory
+                $favoriteImage->move(
+                    $this->getParameter('images_directory'),
+                    $file
+                );
+                //Stock image in database
+                $artist->setFavoriteImage($file);
+            }else{
+                // default image
+                $defaultImage = 'default.png'; 
+                $artist->setFavoriteImage($defaultImage);
+            }
+                
             //Images Management
             //Get images uploaded
             $image = $form->get('images')->getData();
@@ -104,6 +126,24 @@ class ArtistController extends AbstractController
             $name = $form->get('artistName')->getData();
             $upperName = mb_strtoupper($name, 'UTF-8');
             $artist->setArtistName($upperName);
+
+            //Favorite Image
+            //Get images uploaded
+            $favoriteImage = $form->get('favoriteImage')->getData();
+            //return a string: temporary filename in the file Temp of the App
+            if ($favoriteImage) {
+                //Generate a new unique filename
+                $file = md5(uniqid()) . '.' . $favoriteImage->guessExtension();
+
+                //copy the file in uploads directory
+                $favoriteImage->move(
+                    $this->getParameter('images_directory'),
+                    $file
+                );
+                //Stock image in database
+                $artist->setFavoriteImage($file);
+            }
+            //Gallery
             //Get images uploaded
             $image = $form->get('images')->getData();
             //return a string: temporary filename in the file Temp of the App
@@ -200,3 +240,4 @@ class ArtistController extends AbstractController
         // }
     }
 }
+
