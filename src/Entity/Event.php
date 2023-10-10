@@ -24,7 +24,7 @@ class Event
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\NotBlank(message:'La date de début de l\'événement est obligatoire')]
-    #[Assert\GreaterThanOrEqual('now', message:'La date doit être égale ou postérieure à aujourd\'hui')]
+    // #[Assert\GreaterThanOrEqual('now', message:'La date doit être égale ou postérieure à aujourd\'hui')]
     private ?\DateTimeInterface $openingDate = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]

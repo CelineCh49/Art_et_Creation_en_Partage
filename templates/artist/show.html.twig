@@ -74,7 +74,10 @@
 
     <a href="{{ path('app_artist_index') }}">Voir tous les artistes</a>
 
-    <a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier</a>
+    {% if app.user == artist.user %}
+         <a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier ma fiche artiste</a>
+    {% endif %}
+   
 
     {{ include('artist/_delete_form.html.twig') }}
 {% endblock %}

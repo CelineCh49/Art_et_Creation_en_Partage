@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class EventType extends AbstractType
 {
@@ -22,25 +23,31 @@ class EventType extends AbstractType
             ->add('name',TextType::class,[
                 'label'=> 'Nom de l\'événement :',
                 'required' => true,
+                'constraints' => [
+                    new Assert\NotBlank(['message' => 'Le nom est obligatoire.']),
+                ],
             ])
             ->add('openingDate',DateType::class ,[
                 'label'=> 'Date d\'ouverture de l\'événenement',
                 'html5'=>true,
                 'widget'=>'single_text',
-                'required'=>true
+                'required'=>true,
+                
             ])
             ->add('closingDate',DateType::class ,[
                 'label'=> 'Date de clôture de l\'événenement',
                 'html5'=>true,
                 'widget'=>'single_text',
-                'required'=>true
+                'required'=>true,
+                
             ])
             ->add('schedule',TextType::class,[
                 'label'=> 'Créneau horaire :',
                 'required' => true,
                 'attr' => [
                     'placeholder' => 'ex: "de 10h à 12h et de 14h à 18h"'
-                    ]  
+                ],
+                
             ])
             ->add('description', TextareaType::class,[
                 'label'=> 'Description :',

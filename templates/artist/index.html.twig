@@ -48,8 +48,8 @@
                 </td>
             </tr> #}
             {% include 'artist/_card.html.twig'%}
-            <a href="{{ path('app_artist_show', {'id': artist.id}) }}">Afficher</a>
-            <a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier</a>
+            {# <a href="{{ path('app_artist_show', {'id': artist.id}) }}">Afficher</a> #}
+            {# <a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier</a> #}
         {% else %}
             <tr>
                 <td colspan="11">Aucun artiste trouvé</td>
@@ -58,5 +58,5 @@
         </tbody>
     </table>
 </div>
-    <a href="{{ path('app_artist_new') }}">Créer une fiche Artiste</a>
+    {# <a href="{{ path('app_artist_new') }}">Créer une fiche Artiste</a> #}
 {% endblock %}

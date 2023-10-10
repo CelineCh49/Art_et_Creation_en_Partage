@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Le mot de passe est obligatoire')]
-    #[Assert\Length(min: 8, max: 255, minMessage: 'Le mot de passe doit faire au moins {{ limit }} caractères', maxMessage: 'Le mot de passe doit faire au plus {{ limit }} caractères')]
+    #[Assert\Length(min: 6, max: 255, minMessage: 'Le mot de passe doit faire au moins {{ limit }} caractères', maxMessage: 'Le mot de passe doit faire au plus {{ limit }} caractères')]
     private ?string $password = null;
 
     #[ORM\Column(length: 255, nullable: true)]

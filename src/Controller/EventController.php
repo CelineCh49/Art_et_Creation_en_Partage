@@ -34,62 +34,66 @@ class EventController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //Favorite Image
-            //Get images uploaded
-            $favoriteImage = $form->get('favoriteImage')->getData();
-            //return a string: temporary filename in the file Temp of the App
-            if ($favoriteImage) {
-                //Generate a new unique filename
-                $file = md5(uniqid()) . '.' . $favoriteImage->guessExtension();
+            $errors = $this->checkEvent($event);
+            if (count($errors) === 0) {
 
-                //copy the file in uploads directory
-                $favoriteImage->move(
-                    $this->getParameter('event_images_directory'),
-                    $file
-                );
-                //Stock image in database
-                $event->setFavoriteImage($file);
-            }else{
-                // default image
-                $defaultImage = 'default.png'; 
-                $event->setFavoriteImage($defaultImage);
+                //Favorite Image
+                //Get images uploaded
+                $favoriteImage = $form->get('favoriteImage')->getData();
+                //return a string: temporary filename in the file Temp of the App
+                if ($favoriteImage) {
+                    //Generate a new unique filename
+                    $file = md5(uniqid()) . '.' . $favoriteImage->guessExtension();
+
+                    //copy the file in uploads directory
+                    $favoriteImage->move(
+                        $this->getParameter('event_images_directory'),
+                        $file
+                    );
+                    //Stock image in database
+                    $event->setFavoriteImage($file);
+                } else {
+                    // default image
+                    $defaultImage = 'default.png';
+                    $event->setFavoriteImage($defaultImage);
+                }
+
+                //Images Management
+                //Get images uploaded
+                $image = $form->get('images')->getData();
+                //return a string: temporary filename in the file Temp of the App
+                if ($image) {
+                    //Generate a new unique filename
+                    $file = md5(uniqid()) . '.' . $image->guessExtension();
+
+                    //copy the file in uploads directory
+                    $image->move(
+                        $this->getParameter('event_images_directory'),
+                        $file
+                    );
+                    //Stock image in database
+                    $eventImage = new EventImage();
+                    $eventImage->setFileName($file);
+                    $event->addEventImage($eventImage);
+                }
+
+                // $formArtists = $form->get('artists')->getData();
+                // foreach ($formArtists as $formArtist) {
+                //     $formArtistName = $formArtist->getArtistName();
+                //     $artist = $artistRepository->findOneByArtistName($formArtistName);
+                //     $artist->addEvent($event);
+                //     $entityManager->persist($artist);
+                // }
+                $entityManager->persist($event);
+                $entityManager->flush();
+                $this->addFlash('success', 'L\'événement a été ajouté avec succès.');
+
+                return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
+            } else {
+                foreach ($errors as $error) {
+                    $this->addFlash('error', $error);
+                }
             }
-
-            //Images Management
-            //Get images uploaded
-            $image = $form->get('images')->getData();
-            //return a string: temporary filename in the file Temp of the App
-            if ($image) {
-                //Generate a new unique filename
-                $file = md5(uniqid()) . '.' . $image->guessExtension();
-
-                //copy the file in uploads directory
-                $image->move(
-                    $this->getParameter('event_images_directory'),
-                    $file
-                );
-                //Stock image in database
-                $eventImage = new EventImage();
-                $eventImage->setFileName($file);
-                $event->addEventImage($eventImage); 
-            }
-
-            // $formArtists = $form->get('artists')->getData();
-            // foreach ($formArtists as $formArtist) {
-            //     $formArtistName = $formArtist->getArtistName();
-            //     $artist = $artistRepository->findOneByArtistName($formArtistName);
-            //     $artist->addEvent($event);
-            //     $entityManager->persist($artist);
-            // }
-
-
-
-            $entityManager->persist($event);
-            $entityManager->flush();
-            $this->addFlash('success', 'L\'événement a été ajouté avec succès.');
-
-
-            return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('event/new.html.twig', [
@@ -113,103 +117,60 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $errors = $this->checkEvent($event);
+            if (count($errors) === 0) {
 
-             //Favorite Image
-            //Get images uploaded
-            $favoriteImage = $form->get('favoriteImage')->getData();
-            //return a string: temporary filename in the file Temp of the App
-            if ($favoriteImage) {
-                //Generate a new unique filename
-                $file = md5(uniqid()) . '.' . $favoriteImage->guessExtension();
+                //Favorite Image
+                //Get images uploaded
+                $favoriteImage = $form->get('favoriteImage')->getData();
+                //return a string: temporary filename in the file Temp of the App
+                if ($favoriteImage) {
+                    //Generate a new unique filename
+                    $file = md5(uniqid()) . '.' . $favoriteImage->guessExtension();
 
-                //copy the file in uploads directory
-                $favoriteImage->move(
-                    $this->getParameter('event_images_directory'),
-                    $file
-                );
-                //Stock image in database
-                $event->setFavoriteImage($file);
-            }
+                    //copy the file in uploads directory
+                    $favoriteImage->move(
+                        $this->getParameter('event_images_directory'),
+                        $file
+                    );
+                    //Stock image in database
+                    $event->setFavoriteImage($file);
+                }
 
-            //    $formArtists=$form->get('artists')->getData();
+                //Images Management
+                //Get images uploaded
+                $image = $form->get('images')->getData();
+                //return a string: temporary filename in the file Temp of the App
+                if ($image) {
+                    //Generate a new unique filename
+                    $file = md5(uniqid()) . '.' . $image->guessExtension();
 
-            //Add an artist
-            // foreach ($formArtists as $formArtist) {     
-            //     $formArtistName=$formArtist->getArtistName();
-            //     $artist = $artistRepository->findOneByArtistName($formArtistName);
-            //     $artist->addEvent($event);
-            //     $entityManager->persist($artist);
-            // }
+                    //copy the file in uploads directory
+                    $image->move(
+                        $this->getParameter('event_images_directory'),
+                        $file
+                    );
+                    //Stock image in database
+                    $eventImage = new EventImage();
+                    $eventImage->setFileName($file);
+                    $event->addEventImage($eventImage);
+                    $entityManager->persist($event);
+                    $this->addFlash('success', 'La photo a été ajoutée avec succès.');
+                }
 
-            // foreach ($formArtists as $formArtist){
-            //     $eventArtists= $event->getArtists();
-            //     if (!$eventArtists->contains($formArtist)){
-            //         $event->addArtist($formArtist); 
-            //         $entityManager->persist($event);
-            //     }
-
-            // }
-
-
-            // //Remove an artist  
-            // $artistList = $event->getArtists(); 
-            // foreach ($artistList as $artist){
-            //     if (!$formArtists->contains($artist)){
-            //         $artist->removeEvent($event);
-            //         $event->removeArtist($artist);
-            //         $entityManager->persist($artist);
-            //         $entityManager->persist($event);
-            //     }
-            //     }
-
-            //chercher tous les artistes de l'event $artistsfromThisevent = findAllArtistsFromThisEvent 
-            // $allArtistsFromThisEvent = $eventRepository->findAllArtistsFromThisEvent($event);
-            // foreach ($formArtists as $formArtist){
-            //     if(!$allArtistsFromThisEvent->contains($formArtist)){
-            //         $event->addArtist($formArtist);
-            //     }
-            //     $entityManager->persist($event);
-            // }
-            // foreach ($allArtistsFromThisEvent as $ArtistFromThisEvent ){
-            //     if(!$formArtists->contains($ArtistFromThisEvent)){
-            //         $event->removeArtist($ArtistFromThisEvent);
-            //     }
-            //     $entityManager->persist($event);
-            // }
-
-            //if artistsfromThisevent n'est pas dans la list des artistes du getData(); 
-            //foreach $artist in $artistsfromThisevent
-            //$artist->remove($event);
-
-            //Images Management
-            //Get images uploaded
-            $image = $form->get('images')->getData();
-            //return a string: temporary filename in the file Temp of the App
-            if ($image) {
-                //Generate a new unique filename
-                $file = md5(uniqid()) . '.' . $image->guessExtension();
-
-                //copy the file in uploads directory
-                $image->move(
-                    $this->getParameter('event_images_directory'),
-                    $file
-                );
-                //Stock image in database
-                $eventImage = new EventImage();
-                $eventImage->setFileName($file);
-                $event->addEventImage($eventImage);
                 $entityManager->persist($event);
-                $this->addFlash('success', 'La photo a été ajoutée avec succès.');
+                $entityManager->flush();
+                $this->addFlash('success', 'L\'événement a été modifié avec succès.');
+
+                return $this->render('event/edit.html.twig', [
+                    'event' => $event,
+                    'form' => $form,
+                ]);
+            } else {
+                foreach ($errors as $error) {
+                    $this->addFlash('error', $error);
+                }
             }
-
-            $entityManager->persist($event);
-            $entityManager->flush();
-            $this->addFlash('success', 'L\'événement a été modifié avec succès.');
-
-            return $this->render('event/edit.html.twig', [
-                'event' => $event,
-                'form' => $form,
-            ]);
         }
 
         return $this->render('event/edit.html.twig', [
@@ -251,5 +212,29 @@ class EventController extends AbstractController
 
             return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER); //TODO: ajouter page erreur: vous n'avez pas accès
         }
+    }
+
+
+    public function checkEvent(Event $event): array
+    {
+        $errors = [];
+        //get data from event
+        $name = $event->getName();
+        $openingDate = $event->getOpeningDate();
+        $closingDate = $event->getClosingDate();
+        $schedule = $event->getSchedule();
+
+        //Check constraints
+        if (!$name) {
+            $errors[] = 'Le nom est obligatoire.';
+        }
+        if ($closingDate < $openingDate) {
+            $errors[] = 'La date de clôture doit être postérieure à la date d\'ouverture.';
+        }
+        if (!$schedule) {
+            $errors[] = 'Les horaires sont obligatoires.';
+        }
+
+        return $errors;
     }
 }

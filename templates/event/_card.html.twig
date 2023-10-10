@@ -1,4 +1,4 @@
-{# <div class="card">
+<div class="card">
 <a href="{{path ('app_event_show', {'id':event.id})}}" title='{{event.name}}'>
     <img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" height="150">
     <div class="card-body">
@@ -10,9 +10,9 @@
             {{event.description}}
         </div>
     </div>
-</div> #}
+</div>
 
-<div class="w-[310px] h-[450px] relative">
+{# <div class="w-[310px] h-[450px] relative">
     <a href="{{path ('app_event_show', {'id':event.id})}}" title='{{event.name}}'>
     <img class="w-[310px] h-[280px] left-0 top-0 absolute rounded-[5px]" src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite"  />
     <div class="left-0 top-[325px] absolute text-zinc-600 text-lg font-bold font-['Lora'] leading-[25px]">{{ event.name }}</div>
@@ -32,4 +32,4 @@
 <div class="w-[77px] h-6 px-2.5 py-1.5 left-[213px] top-[20px] absolute bg-white bg-opacity-20 rounded-lg justify-center items-center gap-2.5 inline-flex">
 <div class="text-center text-white text-[10px] font-bold font-['Roboto']">ADVENTURE</div>
 </div>
-</div> 
+</div>  #}
