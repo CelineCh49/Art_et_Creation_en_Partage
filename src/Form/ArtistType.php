@@ -25,16 +25,17 @@ class ArtistType extends AbstractType
             'label'=> 'Nom d\'artiste :',
             'required' => true,
         ])
-        ->add('firstName',TextType::class,[
-            'label'=> 'Prénom :',
-            'required' => true,
-        ])
-        ->add('lastName',TextType::class,[
-            'label'=> 'Nom :',
-            'required' => true,
-        ])
+        // ->add('firstName',TextType::class,[
+        //     'label'=> 'Prénom :',
+        //     'required' => true,
+        // ])
+        // ->add('lastName',TextType::class,[
+        //     'label'=> 'Nom :',
+        //     'required' => true,
+        // ])
         ->add('description', TextareaType::class,[
             'label'=> 'Description :',
+            'required' => true,
             'attr' => [
         'placeholder' => 'Décrivez votre style, votre concept, ce qui définit votre art...'
             ]   
@@ -76,9 +77,10 @@ class ArtistType extends AbstractType
            ->add('categories', EntityType::class,[
                 'class' => Category::class,
                 'choice_label' => 'name', 
-                'label' => 'Catégorie : ',
+                'label' => 'Catégories : ',
                 'placeholder' => 'Sélectionnez une catégorie', 
                 'required' => false, 
+                'expanded' => true,//checkbox style
                 'multiple' => true, // Enable multiple selections
             ])
             
@@ -87,6 +89,7 @@ class ArtistType extends AbstractType
                 'choice_label' => 'name', 
                 'label' => 'Evénement participé',
                 'placeholder' => 'Sélectionnez un ou plusieurs événements', 
+                'expanded' => true,//checkbox style
                 'multiple' => true, // Enable multiple selections
                 'required' => false, 
             ])

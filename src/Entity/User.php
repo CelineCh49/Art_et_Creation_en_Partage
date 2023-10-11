@@ -36,11 +36,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min: 6, max: 255, minMessage: 'Le mot de passe doit faire au moins {{ limit }} caractères', maxMessage: 'Le mot de passe doit faire au plus {{ limit }} caractères')]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $firstName = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $lastName = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Regex(pattern:  '/^0[1-9]([-. ]?[0-9]{2}){4}$/')] // for french format //TODO: changer pour  le regex pour l'international
+    private ?string $telephone = null;
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])] 
     private ?Artist $artist = null;
@@ -157,6 +161,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->artist = $artist;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): static
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }

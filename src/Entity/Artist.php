@@ -24,17 +24,18 @@ class Artist
     #[Assert\Length(min: 1, max: 255, minMessage: 'Le nom d\'artiste doit faire au moins {{ limit }} caractères', maxMessage: 'Le nom d\'artiste doit faire au plus {{ limit }} caractères')]
     private ?string $artistName = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Le prénom est obligatoire')]
-    #[Assert\Length(min: 2, max: 255, minMessage: 'Le prénom  doit faire au moins {{ limit }} caractères', maxMessage: 'Le prénom doit faire au plus {{ limit }} caractères')]
-    private ?string $firstName = null;
+    // #[ORM\Column(length: 255)]
+    // #[Assert\NotBlank(message: 'Le prénom est obligatoire')]
+    // #[Assert\Length(min: 2, max: 255, minMessage: 'Le prénom  doit faire au moins {{ limit }} caractères', maxMessage: 'Le prénom doit faire au plus {{ limit }} caractères')]
+    // private ?string $firstName = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Le nom est obligatoire')]
-    #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom  doit faire au moins {{ limit }} caractères', maxMessage: 'Le nom doit faire au plus {{ limit }} caractères')]
-    private ?string $lastName = null;
+    // #[ORM\Column(length: 255)]
+    // #[Assert\NotBlank(message: 'Le nom est obligatoire')]
+    // #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom  doit faire au moins {{ limit }} caractères', maxMessage: 'Le nom doit faire au plus {{ limit }} caractères')]
+    // private ?string $lastName = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: 'Une description est obligatoire')]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -98,29 +99,29 @@ class Artist
         return $this;
     }
 
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
-    }
+    // public function getFirstName(): ?string
+    // {
+    //     return $this->firstName;
+    // }
 
-    public function setFirstName(string $firstName): static
-    {
-        $this->firstName = $firstName;
+    // public function setFirstName(string $firstName): static
+    // {
+    //     $this->firstName = $firstName;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
+    // public function getLastName(): ?string
+    // {
+    //     return $this->lastName;
+    // }
 
-    public function setLastName(string $lastName): static
-    {
-        $this->lastName = $lastName;
+    // public function setLastName(string $lastName): static
+    // {
+    //     $this->lastName = $lastName;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getDescription(): ?string
     {

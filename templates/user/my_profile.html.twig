@@ -8,15 +8,19 @@
 
 		{{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
 
-
+		<div class="flex flex-col">
+			<label class="mb-1 font-medium">{{ form_label(form.firstName) }}</label>
+			{{ form_widget(form.firstName, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+		</div>
+		
 		<div class="flex flex-col">
 			<label class="mb-1 font-medium">{{ form_label(form.lastName) }}</label>
 			{{ form_widget(form.lastName, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
 		</div>
 
 		<div class="flex flex-col">
-			<label class="mb-1 font-medium">{{ form_label(form.firstName) }}</label>
-			{{ form_widget(form.firstName, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
+			<label class="mb-1 font-medium">{{ form_label(form.telephone) }}</label>
+			{{ form_widget(form.telephone, {'attr': {'class': 'border p-2 rounded-md w-full'}}) }}
 		</div>
 
 		<div class="flex flex-col">
