@@ -6,16 +6,22 @@
 			{% block title %}Art et création en partage
 			{% endblock %}
 		</title>
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> {% block stylesheets %}{% endblock %}{% block javascripts %}{% endblock %}
-            {{ encore_entry_link_tags('app') }}
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> 
+           {% block stylesheets %}
+    		 {{ encore_entry_link_tags('app') }}
             {{ encore_entry_script_tags('app') }}
+ 			{% endblock %}
+		   
 	</head>
-		<div>
+	<body class="container mx-auto bg-yellow-700">
+		<div class=" bg-green-700">
 			<!-- Navigation -->
 			{% include "inc/nav.html.twig" %}
 			<!-- Main Content -->
-			<div>
-				{% block body %}{% endblock %}
+			<div class="">
+				{% block body %}
+				
+				{% endblock %}
 
 				{% for key, messages in app.flashes %}
 					{% for message in messages %}
@@ -28,4 +34,5 @@
 			<!-- Footer -->
 
 		</div>
+	</body>
 </html>

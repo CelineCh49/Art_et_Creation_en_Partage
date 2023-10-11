@@ -42,7 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $lastName = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])] //TODO: vérifier la cascade
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])] 
     private ?Artist $artist = null;
 
     public function getId(): ?int

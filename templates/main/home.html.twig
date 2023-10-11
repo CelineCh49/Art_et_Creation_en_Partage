@@ -3,35 +3,37 @@
 {% block title %}Art et Création en partage{% endblock %}
 
 {% block body %}
-<div>
-   <h1> Qui sommes-nous?</h1>
+<div class="">
    <div>
-      <a href="{{path ('app_about_us')}}" title='A propos'>A propos</a>
-      <a href="{{path ('app_apply')}}" title='Appel à candidature'>Appel à candidature</a>
-      <a href="{{path ('app_contact')}}" title='Nous contacter'>Nous contacter</a>
+      <h1> Qui sommes-nous?</h1>
+      <div>
+         <a href="{{path ('app_about_us')}}" title='A propos'>A propos</a>
+         <a href="{{path ('app_apply')}}" title='Appel à candidature'>Appel à candidature</a>
+         <a href="{{path ('app_contact')}}" title='Nous contacter'>Nous contacter</a>
+      </div>
    </div>
-</div>
 
-<div>
-<h1> Nos événements</h1>
- 
-   {% for event in events %}
-      {% include 'event/_card.html.twig'%}
-       {# <a href="{{path ('app_event_show', {'id':event.id})}}" title='Aller à {{event.name}}'>
-       <img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" height="150">
-       {{event.name}}</a>  #}
-    {% endfor %} 
-     <a href="{{path ('app_event_index')}}" title='Voir tous les événements'>Tous nos événements</a>
-</div>
-<div>
-<h1> Nos artistes</h1>
- 
-   {% for artist in artists %}
-      {% include 'artist/_card.html.twig'%}
-       {# <a href="{{path ('app_artist_show', {'id':artist.id})}}" title='{{artist.artistName}}'>
-       <img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite" height="150">
-       {{artist.artistName}}</a>  #}
-    {% endfor %} 
-     <a href="{{path ('app_artist_index')}}" title='Voir tous les artistes'>Tous les artistes</a>
+   <div>
+   <h1> Nos événements</h1>
+   
+      {% for event in events %}
+         {% include 'event/_card.html.twig'%}
+         {# <a href="{{path ('app_event_show', {'id':event.id})}}" title='Aller à {{event.name}}'>
+         <img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" height="150">
+         {{event.name}}</a>  #}
+      {% endfor %} 
+      <a href="{{path ('app_event_index')}}" title='Voir tous les événements'>Tous nos événements</a>
+   </div>
+   <div>
+   <h1> Nos artistes</h1>
+   
+      {% for artist in artists %}
+         {% include 'artist/_card.html.twig'%}
+         {# <a href="{{path ('app_artist_show', {'id':artist.id})}}" title='{{artist.artistName}}'>
+         <img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite" height="150">
+         {{artist.artistName}}</a>  #}
+      {% endfor %} 
+      <a href="{{path ('app_artist_index')}}" title='Voir tous les artistes'>Tous les artistes</a>
+   </div>
 </div>
 {% endblock %}
