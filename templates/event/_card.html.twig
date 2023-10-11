@@ -1,4 +1,4 @@
-<div class="card">
+{# <div class="card">
 <a href="{{path ('app_event_show', {'id':event.id})}}" title='{{event.name}}'>
     <img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" height="150">
     <div class="card-body">
@@ -10,26 +10,13 @@
             {{event.description}}
         </div>
     </div>
-</div>
+</div> #}
 
-{# <div class="w-[310px] h-[450px] relative">
-    <a href="{{path ('app_event_show', {'id':event.id})}}" title='{{event.name}}'>
-    <img class="w-[310px] h-[280px] left-0 top-0 absolute rounded-[5px]" src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite"  />
-    <div class="left-0 top-[325px] absolute text-zinc-600 text-lg font-bold font-['Lora'] leading-[25px]">{{ event.name }}</div>
-    <div class="left-0 top-[295px] absolute text-gray-500 text-xs font-normal font-['Lora']">Du {{ event.openingDate|date('d/m/Y')}} au {{ event.closingDate|date('d/m/Y')}}</div>
-    <div class="left-0 top-[390px] absolute text-gray-500 text-xs font-normal font-['Lora'] leading-tight">{{event.description}}</div>
-  
-    
-    </div>
-    </a>
-</div> 
-
-<div class="w-[310px] h-[450px] relative">
-<img class="w-[310px] h-[280px] left-0 top-0 absolute rounded-[5px]" src="https://via.placeholder.com/310x280" />
-<div class="left-0 top-[325px] absolute text-zinc-600 text-lg font-bold font-['Lora'] leading-[25px]">Dream destinations to visit this<br/>year in Paris</div>
-<div class="left-0 top-[295px] absolute text-gray-500 text-xs font-normal font-['Lora']">08.08.2021</div>
-<div class="left-0 top-[390px] absolute text-gray-500 text-xs font-normal font-['Lora'] leading-tight">Progressively incentivize cooperative systems through<br/>technically sound functionalities. Credibly productivate<br/>seamless data with flexible schemas.</div>
-<div class="w-[77px] h-6 px-2.5 py-1.5 left-[213px] top-[20px] absolute bg-white bg-opacity-20 rounded-lg justify-center items-center gap-2.5 inline-flex">
-<div class="text-center text-white text-[10px] font-bold font-['Roboto']">ADVENTURE</div>
-</div>
-</div>  #}
+<a href="{{path ('app_event_show', {'id':event.id})}}" title='{{event.name}}' class="group">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+          <img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" class="h-full w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <p class="mt-4 text-sm text-gray-700">Du {{ event.openingDate|date('d/m/Y')}} au {{ event.closingDate|date('d/m/Y')}}</p>
+        <h3 class="mt-1 text-lg font-medium text-gray-900">{{ event.name}}</h3>
+        <p class="mt-4 text-sm text-gray-700 line-clamp-3">{{event.description}}</p>
+</a>

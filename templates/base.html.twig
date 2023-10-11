@@ -7,32 +7,33 @@
 			{% endblock %}
 		</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> 
-           {% block stylesheets %}
+
+		   {% block stylesheets %}
     		 {{ encore_entry_link_tags('app') }}
             {{ encore_entry_script_tags('app') }}
  			{% endblock %}
 		   
 	</head>
-	<body class="container mx-auto bg-yellow-700">
-		<div class=" bg-green-700">
+	<body class="container mx-auto bg-slate-600">
+		<div class=" bg-slate-100">
 			<!-- Navigation -->
 			{% include "inc/nav.html.twig" %}
 			<!-- Main Content -->
 			<div class="">
+			{% for key, messages in app.flashes %}
+				{% for message in messages %}
+					<div class="alert alert-{{ key }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endfor %}
+
 				{% block body %}
-				
 				{% endblock %}
 
-				{% for key, messages in app.flashes %}
-					{% for message in messages %}
-						<div class="alert alert-{{ key }}">
-							{{ message }}
-						</div>
-					{% endfor %}
-				{% endfor %}
 			</div>
 			<!-- Footer -->
-
+			{% include "inc/footer.html.twig" %}
 		</div>
 	</body>
 </html>

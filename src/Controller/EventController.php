@@ -228,7 +228,7 @@ class EventController extends AbstractController
         if (!$name) {
             $errors[] = 'Le nom est obligatoire.';
         }
-        if ($closingDate > $openingDate) {
+        if ($closingDate < $openingDate) {
             $errors[] = 'La date de clôture doit être postérieure à la date d\'ouverture.'; // TODO:à modifier, ne marche pas
         }
         if (!$schedule) {

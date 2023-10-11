@@ -1,83 +1,115 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{artist.artistName}}{% endblock %}
+{% block title %}
+	{{artist.artistName}}
+{% endblock %}
 
 {% block body %}
-    <h1>{{artist.artistName}}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom d'artiste</th>
-                <td>{{ artist.artistName }}</td>
-            </tr>
-             <tr>
-                <th>Image favorite</th>
-                <td><img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite" height="150"></td>
-            </tr>
-            {# <tr>
-                <th>Prénom</th>
-                <td>{{ artist.firstName }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ artist.lastName }}</td>
-            </tr> #}
-            <tr>
-                <th>Description</th>
-                <td>{{ artist.description }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ artist.email }}</td>
-            </tr>
-            <tr>
-                <th>Téléphone</th>
-                <td>{{ artist.telephone }}</td>
-            </tr>
-            <tr>
-                <th>Site internet</th>
-                <td>{{ artist.websiteLink }}</td>
-            </tr>
-            <tr>
-                <th>Facebook</th>
-                <td>{{ artist.facebookLink }}</td>
-            </tr>
-            <tr>
-                <th>Instagram</th>
-                <td>{{ artist.instagramLink }}</td>
-            </tr>
-            <tr>
-                <th>Catégories</th>
-                <td>{% for category in artist.categories %}
-                     <a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.name }}</a> 
-                {% endfor %}
-                </td>
-            </tr>
-             <tr>
-                <th>Evénements participés</th>
-                <td>{% for event in artist.events %}
-                    <a href="{{ path('app_event_show', {'id': event.id}) }}">
-                    <img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" height="150">{{ event.name }}</a>
-                {% endfor %}
-                </td>
-            </tr>
-             <tr>
-                <th>Images</th>
-                <td>{% for image in artist.artistImages %}
-                <img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="{{image.fileName}}" height="150">
-                {% endfor %}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+	<div >
+		<div class="pt-6">
+			<!-- Artist info -->
+			<div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+				<div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+					<h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{artist.artistName}}</h1>
+					<div class="text-sm text-gray-500">
+						{% for category in artist.categories %}
+							#{{ category.name }}
+						{% endfor %}
+					</div>
+				</div>
 
-    <a href="{{ path('app_artist_index') }}">Voir tous les artistes</a>
+				<!-- Favorite Image -->
+				<div class="mt-4 lg:row-span-3 lg:mt-0">
+					<img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite" height="150">
+				</div>
 
-    {% if app.user == artist.user %}
-         <a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier ma fiche artiste</a>
-    {% endif %}
-   
+				<div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
+					<!-- Description and details -->
+					<div>
+						<div class="space-y-6">
+							<p class="text-base text-gray-900">{{ artist.description }}</p>
+						</div>
+					</div>
 
-    {{ include('artist/_delete_form.html.twig') }}
+					<div class="mt-10">
+						<h3 class="text-sm font-medium text-gray-900">Contacts:</h3>
+
+						<div class="mt-4">
+							<ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+								{% if artist.email != null %}
+									<li class="text-gray-400">
+										<span class="text-gray-600">Email:
+											{{ artist.email }}
+										</span>
+									</li>
+								{% endif %}
+								{% if artist.telephone != null %}
+									<li class="text-gray-400">
+										<span class="text-gray-600">Téléphone:
+											{{ artist.telephone }}
+										</span>
+									</li>
+								{% endif %}
+								{% if artist.websiteLink != null %}
+									<li class="text-gray-400">
+										<span class="text-gray-600 ">Site internet:
+											<a href="{{ artist.websiteLink }}" target="_blank" class="underline">{{ artist.websiteLink }}</a>
+										</span>
+									</li>
+								{% endif %}
+								{% if artist.facebookLink != null %}
+									<li class="text-gray-400">
+										<span class="text-gray-600">Facebook:
+											<a href="{{ artist.facebookLink }}" target="_blank" class="underline">{{ artist.facebookLink }}</a>
+										</span>
+									</li>
+								{% endif %}
+								{% if artist.instagramLink != null %}
+									<li class="text-gray-400">
+										<span class="text-gray-600">Instagram:
+											<a href="{{ artist.instagramLink }}" target="_blank" class="underline">{{ artist.instagramLink }}</a>
+										</span>
+									</li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+
+					<div class="mt-10">
+						<h2 class="text-sm font-medium text-gray-900">Evénements participés :</h2>
+						<div class="mt-4 flex">
+							{% for event in artist.events %}
+								<div class="text-gray-600 font-semibold underline container">
+									<a href="{{ path('app_event_show', {'id': event.id}) }}">{{ event.name }}</a>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+    <!-- Image gallery -->
+    <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 ">
+        {% for image in artist.artistImages %}
+        <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
+            <img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="{{image.fileName}}" class="h-full w-full object-cover object-center">
+        </div>		
+	{% endfor %}
+    </div>
+
+
+	{# <th>Evénements participés</th>
+	<td>
+		{% for event in artist.events %}
+			<a href="{{ path('app_event_show', {'id': event.id}) }}">
+				<img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" height="150">{{ event.name }}</a>
+		{% endfor %}
+	</td> #}
+<a href="{{ path('app_artist_index') }}">Voir tous les artistes</a>
+{% if app.user == artist.user %}<a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier ma fiche artiste</a>
+{% endif %}
+{{ include('artist/_delete_form.html.twig') }}
 {% endblock %}

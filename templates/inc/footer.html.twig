@@ -1,13 +1,10 @@
 
-<header class="h-[300px] flex flex-col">
-	<nav class="bg-gray-800">
+<footer class="flex flex-col bg-gray-800">
+	<nav >
 		<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 			<div class="relative flex h-16 items-center justify-between">
 				
 				<div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-					<div class="flex flex-shrink-0 items-center"><!-- logo-->
-						<img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Art et création en partage">
-					</div>
 					<div class="hidden sm:ml-6 sm:block "> <!-- items nav link-->
 						<div class="flex space-x-4">
 							<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
@@ -36,22 +33,9 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- Mobile menu, show/hide based on menu state. -->
-		<div class="sm:hidden" id="mobile-menu">
-			<div
-				class="space-y-1 px-2 pb-3 pt-2">
-				<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-				<a href="{{path('app_main')}}" class="ttext-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"> Accueil</a>
-				<a href="{{path('app_about_us')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">A propos</a>
-				<a href="{{path('app_event_index')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Evénements</a>
-				<a href="{{path('app_artist_index')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Artistes</a>
-				<a href="{{path('app_contact')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Contact</a>
-			</div>
-		</div>
 	</nav>
-	<div class="flex-1 flex flex-col justify-center text-white bg-gradient-to-r from-lime-900 to-lime-400 ">
-            <h1 class="text-4xl pl-20 ">Art et création en partage</h1>
-            <p class="text-xl pl-20">Promotion d'artistes en tout domaine</p>
+    <div class="flex items-center justify-center">
+        <p class="text-sm text-gray-300">2023 | Art et création en partage</p>
     </div>
-</header>
+
+</footer>

@@ -3,60 +3,24 @@
 {% block title %}Liste des artistes{% endblock %}
 
 {% block body %}
-    <h1>Liste des artistes</h1>
-
 <div>
     {% include 'artist/_filter.html.twig' %}
 </div>
 
-<div>
-    {# <table class="table">
-        <thead>
-            <tr>
-                <th>Nom d'artiste</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Catégories</th>
-                <th>Email</th>
-                <th>Téléphone</th>
-                <th>Site internet</th>
-                <th>Facebook</th>
-                <th>Instagram</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody> #}
+<section > <!--Les artistes-->
+  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
+      <div class="flex items-center justify-between pb-10">
+         <h2 class="text-2xl font-bold tracking-tight text-gray-900 ">Tous les artistes</h2>
+      </div>
+
+      <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
         {% for artist in artists %}
-            {# <tr>
-                <td>{{ artist.artistName }}</td>
-                <td>{{ artist.firstName }}</td>
-                <td>{{ artist.lastName }}</td>
-                <td>{{ artist.description }}</td>
-                <td>{% for category in artist.categories %}
-                    {{category.name}}
-                {% endfor %}
-                </td>
-                <td>{{ artist.email }}</td>
-                <td>{{ artist.telephone }}</td>
-                <td>{{ artist.websiteLink }}</td>
-                <td>{{ artist.facebookLink }}</td>
-                <td>{{ artist.instagramLink }}</td>
-                <td>
-                    <a href="{{ path('app_artist_show', {'id': artist.id}) }}">Afficher</a>
-                    <a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier</a>
-                </td>
-            </tr> #}
             {% include 'artist/_card.html.twig'%}
-            {# <a href="{{ path('app_artist_show', {'id': artist.id}) }}">Afficher</a> #}
-            {# <a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier</a> #}
         {% else %}
-            <tr>
-                <td colspan="11">Aucun artiste trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
-    {# <a href="{{ path('app_artist_new') }}">Créer une fiche Artiste</a> #}
+                <p>Aucun artiste trouvé<p>
+      {% endfor %} 
+      </div>
+  </div>
+</section>
+
 {% endblock %}
