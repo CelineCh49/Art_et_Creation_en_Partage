@@ -50,82 +50,91 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $name = $form->get('artistName')->getData();
-            $upperName = mb_strtoupper($name, 'UTF-8'); //Uppercase and accent
-            $artist->setArtistName($upperName);
-            $artist->setUser($user);
 
-            // //Get images uploaded
-            // $images=$form->get('images')->getData();
+            $errors = $this->checkArtist($artist);
+            if (count($errors) === 0) {
 
-            // //Loop images
-            //     //Generate a new unique filename
-            //     foreach($images as $image){
-            //     $file = md5(uniqid()).'.'.$image->guessExtension();
-            //     //copy the file in uploads directory
-            //     $image->move(
-            //         $this->getParameter('artist_images_directory'),
-            //         $file
-            //     );
-            //     //Stock image in database
-            //     $artistImage = new ArtistImage();
-            //     $artistImage->setFileName($file);
-            //     $artist->addArtistImage($artistImage);
+                //ArtisteName to uppercase
+                $name = $form->get('artistName')->getData(); //TODO:utilité de mettre en majuscule? ne permet pas de mettre des noms d'artistes proches
+                $upperName = mb_strtoupper($name, 'UTF-8'); //Uppercase and accent
+                $artist->setArtistName($upperName);
+                $artist->setUser($user);
 
-            //     }
+                // //Get images uploaded
+                // $images=$form->get('images')->getData();
 
-            //Favorite Image
-            //Get images uploaded
-            $favoriteImage = $form->get('favoriteImage')->getData();
-            //return a string: temporary filename in the file Temp of the App
-            if ($favoriteImage) {
-                //Generate a new unique filename
-                $file = md5(uniqid()) . '.' . $favoriteImage->guessExtension();
+                // //Loop images
+                //     //Generate a new unique filename
+                //     foreach($images as $image){
+                //     $file = md5(uniqid()).'.'.$image->guessExtension();
+                //     //copy the file in uploads directory
+                //     $image->move(
+                //         $this->getParameter('artist_images_directory'),
+                //         $file
+                //     );
+                //     //Stock image in database
+                //     $artistImage = new ArtistImage();
+                //     $artistImage->setFileName($file);
+                //     $artist->addArtistImage($artistImage);
 
-                //copy the file in uploads directory
-                $favoriteImage->move(
-                    $this->getParameter('artist_images_directory'),
-                    $file
-                );
-                //Stock image in database
-                $artist->setFavoriteImage($file);
-            } else {
-                // default image
-                $defaultImage = 'default.png';
-                $artist->setFavoriteImage($defaultImage);
+                //     }
+
+                //Favorite Image
+                //Get images uploaded
+                $favoriteImage = $form->get('favoriteImage')->getData();
+                //return a string: temporary filename in the file Temp of the App
+                if ($favoriteImage) {
+                    //Generate a new unique filename
+                    $file = md5(uniqid()) . '.' . $favoriteImage->guessExtension();
+
+                    //copy the file in uploads directory
+                    $favoriteImage->move(
+                        $this->getParameter('artist_images_directory'),
+                        $file
+                    );
+                    //Stock image in database
+                    $artist->setFavoriteImage($file);
+                } else {
+                    // default image
+                    $defaultImage = 'default.png';
+                    $artist->setFavoriteImage($defaultImage);
+                }
+
+                //Images Management
+                //Get images uploaded
+                $image = $form->get('images')->getData();
+                //return a string: temporary filename in the file Temp of the App
+                if ($image) {
+                    //Generate a new unique filename
+                    $file = md5(uniqid()) . '.' . $image->guessExtension();
+
+                    //copy the file in uploads directory
+                    $image->move(
+                        $this->getParameter('artist_images_directory'),
+                        $file
+                    );
+                    //Stock image in database
+                    $artistImage = new ArtistImage();
+                    $artistImage->setFileName($file);
+                    $artist->addArtistImage($artistImage);
+                }
+
+                $entityManager->persist($artist);
+                $entityManager->flush();
+                $this->addFlash('success', 'L\'artiste a été ajouté avec succès.');
+
+                return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
+            }else{
+                foreach ($errors as $error) {
+                    $this->addFlash('error', $error);
+                }
             }
-
-            //Images Management
-            //Get images uploaded
-            $image = $form->get('images')->getData();
-            //return a string: temporary filename in the file Temp of the App
-            if ($image) {
-                //Generate a new unique filename
-                $file = md5(uniqid()) . '.' . $image->guessExtension();
-
-                //copy the file in uploads directory
-                $image->move(
-                    $this->getParameter('artist_images_directory'),
-                    $file
-                );
-                //Stock image in database
-                $artistImage = new ArtistImage();
-                $artistImage->setFileName($file);
-                $artist->addArtistImage($artistImage);
-            }
-
-            $entityManager->persist($artist);
-            $entityManager->flush();
-            $this->addFlash('success', 'L\'artiste a été ajouté avec succès.');
-
-            return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('artist/new.html.twig', [
             'artist' => $artist,
             'form' => $form,
         ]);
-        // }
     }
 
     #[Route('/{id}', name: 'app_artist_show', methods: ['GET'])]
@@ -146,64 +155,71 @@ class ArtistController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $name = $form->get('artistName')->getData();
-                $upperName = mb_strtoupper($name, 'UTF-8');
-                $artist->setArtistName($upperName);
+                $errors = $this->checkArtist($artist);
+                if (count($errors) === 0) {
 
-                //Favorite Image
-                //Get images uploaded
-                $favoriteImage = $form->get('favoriteImage')->getData();
-                //return a string: temporary filename in the file Temp of the App
-                if ($favoriteImage) {
-                    //Generate a new unique filename
-                    $file = md5(uniqid()) . '.' . $favoriteImage->guessExtension();
+                    //ArtisteName to uppercase
+                    $name = $form->get('artistName')->getData();
+                    $upperName = mb_strtoupper($name, 'UTF-8');
+                    $artist->setArtistName($upperName);
 
-                    //copy the file in uploads directory
-                    $favoriteImage->move(
-                        $this->getParameter('artist_images_directory'),
-                        $file
-                    );
-                    //Stock image in database
-                    $artist->setFavoriteImage($file);
-                }
-                //Gallery
-                //Get images uploaded
-                $image = $form->get('images')->getData();
-                //return a string: temporary filename in the file Temp of the App
-                if ($image) {
-                    //Generate a new unique filename
-                    $file = md5(uniqid()) . '.' . $image->guessExtension();
+                    //Favorite Image
+                    //Get images uploaded
+                    $favoriteImage = $form->get('favoriteImage')->getData();
+                    //return a string: temporary filename in the file Temp of the App
+                    if ($favoriteImage) {
+                        //Generate a new unique filename
+                        $file = md5(uniqid()) . '.' . $favoriteImage->guessExtension();
 
-                    //copy the file in uploads directory
-                    $image->move(
-                        $this->getParameter('artist_images_directory'),
-                        $file
-                    );
-                    //Stock image in database
-                    $artistImage = new ArtistImage();
-                    $artistImage->setFileName($file);
-                    $artist->addArtistImage($artistImage);
+                        //copy the file in uploads directory
+                        $favoriteImage->move(
+                            $this->getParameter('artist_images_directory'),
+                            $file
+                        );
+                        //Stock image in database
+                        $artist->setFavoriteImage($file);
+                    }
+                    //Gallery
+                    //Get images uploaded
+                    $image = $form->get('images')->getData();
+                    //return a string: temporary filename in the file Temp of the App
+                    if ($image) {
+                        //Generate a new unique filename
+                        $file = md5(uniqid()) . '.' . $image->guessExtension();
+
+                        //copy the file in uploads directory
+                        $image->move(
+                            $this->getParameter('artist_images_directory'),
+                            $file
+                        );
+                        //Stock image in database
+                        $artistImage = new ArtistImage();
+                        $artistImage->setFileName($file);
+                        $artist->addArtistImage($artistImage);
+                        $entityManager->persist($artist);
+                        $this->addFlash('success', 'La photo a été ajoutée avec succès.');
+                    }
+
                     $entityManager->persist($artist);
-                    $this->addFlash('success', 'La photo a été ajoutée avec succès.');
+                    $entityManager->flush();
+
+                    $this->addFlash('success', 'L\'artiste a été modifié avec succès.');
+
+                    return $this->render('artist/edit.html.twig', [
+                        'artist' => $artist,
+                        'form' => $form,
+                    ]);
+                } else {
+                    foreach ($errors as $error) {
+                        $this->addFlash('error', $error);
+                    }
                 }
-
-                $entityManager->persist($artist);
-                $entityManager->flush();
-
-                $this->addFlash('success', 'L\'artiste a été modifié avec succès.');
-
-                return $this->render('artist/edit.html.twig', [
-                    'artist' => $artist,
-                    'form' => $form,
-                ]);
             }
-
             return $this->render('artist/edit.html.twig', [
                 'artist' => $artist,
                 'form' => $form,
             ]);
-        
-        }else{
+        } else {
             throw new AccessDeniedException('Accès interdit');
         }
     }
@@ -242,28 +258,46 @@ class ArtistController extends AbstractController
 
             return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
         }
+    }
 
 
 
+    // //AJAX request
+    // $data = json_decode($request->getContent(),true); // true: to get column name
 
-        // //AJAX request
-        // $data = json_decode($request->getContent(),true); // true: to get column name
+    // //check if token is valid
+    // if ($this->isCsrfTokenValid('delete'.$artistImage->getId(), $data['_token'])){//token name : 'deleteId'
+    //    //Get image name
+    //     $name=$artistImage->getFileName();
+    //     //delete the file in the directory
+    //     unlink($this->getParameter('artist_images_directory').'/'.$name);
+    //     //delete in the database
+    //     $entityManager->remove($artistImage);
+    //     $entityManager->flush();
 
-        // //check if token is valid
-        // if ($this->isCsrfTokenValid('delete'.$artistImage->getId(), $data['_token'])){//token name : 'deleteId'
-        //    //Get image name
-        //     $name=$artistImage->getFileName();
-        //     //delete the file in the directory
-        //     unlink($this->getParameter('artist_images_directory').'/'.$name);
-        //     //delete in the database
-        //     $entityManager->remove($artistImage);
-        //     $entityManager->flush();
+    //     //Json response
+    //     return new JsonResponse(['success'=>1]);
+    // }
+    // else{
+    //     return new JsonResponse(['error'=>'Token invalide'], 400);
+    // }
 
-        //     //Json response
-        //     return new JsonResponse(['success'=>1]);
-        // }
-        // else{
-        //     return new JsonResponse(['error'=>'Token invalide'], 400);
-        // }
+    public function checkArtist(Artist $artist): array
+    {
+        $errors = [];
+        //get data from artist
+        $artistName = $artist->getArtistName();
+        $description = $artist->getDescription();
+
+
+        //Check constraints
+        if (!$artistName) {
+            $errors[] = 'Le nom d\'artiste est obligatoire.';
+        }
+        if (!$description) {
+            $errors[] = 'La description est obligatoire.';
+        }
+
+        return $errors;
     }
 }

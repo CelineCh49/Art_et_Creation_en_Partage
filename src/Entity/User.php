@@ -37,16 +37,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le prénom est obligatoire')]
+    #[Assert\Length(min: 1, max: 255, minMessage: 'Le prénom doit faire au moins {{ limit }} caractères', maxMessage: 'Le prénom doit faire au plus {{ limit }} caractères')]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le nom est obligatoire')]
+    #[Assert\Length(min: 1, max: 255, minMessage: 'Le nom doit faire au moins {{ limit }} caractères', maxMessage: 'Le nom doit faire au plus {{ limit }} caractères')]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Regex(pattern:  '/^0[1-9]([-. ]?[0-9]{2}){4}$/')] // for french format //TODO: changer pour  le regex pour l'international
     private ?string $telephone = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])] 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])] //TODO: vérifier la cascade
     private ?Artist $artist = null;
 
     public function getId(): ?int

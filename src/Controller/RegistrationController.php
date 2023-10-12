@@ -24,27 +24,60 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
-            
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+            $errors = $this->checkUser($user);
+            if (count($errors) === 0) {
 
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
+                // encode the plain password
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+                // do anything else you need here, like send an email
+
+                return $userAuthenticator->authenticateUser(
+                    $user,
+                    $authenticator,
+                    $request
+                );
+            } else {
+                foreach ($errors as $error) {
+                    $this->addFlash('error', $error);
+                }
+            }
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+    }
+    public function checkUser(User $user): array
+    {
+        $errors = [];
+        //get data from event
+        $email = $user->getEmail();
+        $password = $user->getPassword();
+        $firstName = $user->getFirstName();
+        $lastName = $user->getLastName();
+
+        //Check constraints
+        if (!$email) {
+            $errors[] = 'L\'email est obligatoire.';
+        }
+        if (!$password) {
+            $errors[] = 'Le mot de passe est obligatoire.';
+        }
+        if (!$firstName) {
+            $errors[] = 'Le prénom est obligatoire.';
+        }
+        if (!$lastName) {
+            $errors[] = 'Le nom est obligatoire.';
+        }
+
+        return $errors;
     }
 }

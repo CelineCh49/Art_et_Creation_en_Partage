@@ -5,8 +5,8 @@
 
 {% block body %}
 		<h3 class="text-2xl font-semibold mb-4">Mon profil</h3>
-
-		{{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+{{ include('user/_form.html.twig', {'button_label': 'Valider'}) }}
+		{# {{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
 
 		<div class="flex flex-col">
 			<label class="mb-1 font-medium">{{ form_label(form.firstName) }}</label>
@@ -53,6 +53,6 @@
 			</a>
 		</div>
 
-		{{ form_end(form) }}
+		{{ form_end(form) }} #}
 
 {% endblock %}

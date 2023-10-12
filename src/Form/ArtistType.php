@@ -94,7 +94,7 @@ class ArtistType extends AbstractType
                 'required' => false, 
             ])
             ->add('favoriteImage', FileType::class, [
-                'label' => 'Image favorite: ',
+                'label' => 'Image favorite: Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Valider" ou "Modifier" ',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -110,7 +110,7 @@ class ArtistType extends AbstractType
                 ],
             ])
             ->add('images', FileType::class, [
-                'label' => 'Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Modifier" ',
+                'label' => 'Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Valider" ou "Modifier" ',
     
                 // unmapped means that this field is not associated to any entity property
                 //So we can handle images ourself in ArtistController

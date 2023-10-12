@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ArtistRepository::class)]
-#[UniqueEntity(fields: ['artistName'], message: 'Cet artiste existe déjà.')]
+#[UniqueEntity(fields: ['artistName'], message: 'Ce nom d\'artiste est déjà pris.')]
 class Artist
 {
     #[ORM\Id]
@@ -60,7 +60,7 @@ class Artist
     #[Assert\Url(message : "Veuillez saisir une URL valide commençant par http:// ou https://" )]
     private ?string $instagramLink = null;
 
-    #[ORM\OneToOne(inversedBy: 'artist', cascade: ['persist', 'remove'])] //TODO: vérifier la cascade
+    #[ORM\OneToOne(inversedBy: 'artist', cascade: ['persist'])] //TODO: vérifier la cascade
     private ?User $user = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'artists')]

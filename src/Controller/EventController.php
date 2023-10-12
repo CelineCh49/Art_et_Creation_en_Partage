@@ -166,7 +166,7 @@ class EventController extends AbstractController
                     'event' => $event,
                     'form' => $form,
                 ]);
-            } else {
+            }else {
                 foreach ($errors as $error) {
                     $this->addFlash('error', $error);
                 }

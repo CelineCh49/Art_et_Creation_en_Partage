@@ -18,6 +18,22 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        ->add('firstName',TextType::class,[
+            'label'=> 'Prénom :',
+            'required' => true,
+        ])
+        ->add('lastName',TextType::class,[
+            'label'=> 'Nom :',
+            'required' => true,
+        ])
+        ->add('telephone',TelType::class,[
+            'label'=> 'Téléphone :',
+            'required' => false,
+            'attr' => [
+                'pattern' => '/^0[1-9]([-. ]?[0-9]{2}){4}$/', 
+                'title' => 'Un numéro de téléphone valide doit comporter 10 chiffres.'
+            ]
+        ])
         ->add('email',EmailType::class,[
             'label'=> 'Email :',
             'required' => true,
@@ -38,23 +54,6 @@ class UserType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('firstName',TextType::class,[
-                'label'=> 'Prénom :',
-                'required' => true,
-            ])
-            ->add('lastName',TextType::class,[
-                'label'=> 'Nom :',
-                'required' => true,
-            ])
-            ->add('telephone',TelType::class,[
-                'label'=> 'Téléphone :',
-                'required' => false,
-                'attr' => [
-                    'pattern' => '/^0[1-9]([-. ]?[0-9]{2}){4}$/', 
-                    'title' => 'Un numéro de téléphone valide doit comporter 10 chiffres.'
-                ]
-            ])
-        
         ;
     }
 

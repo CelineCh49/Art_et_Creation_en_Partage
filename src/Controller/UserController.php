@@ -16,14 +16,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/user')]
 class UserController extends AbstractController
 {
- // Ajout du constructeur pour le password hasher pour pouvoir éditer le profil
- private UserPasswordHasherInterface $passwordHasher;
+    // Ajout du constructeur pour le password hasher pour pouvoir éditer le profil
+    private UserPasswordHasherInterface $passwordHasher;
 
- public function __construct(UserPasswordHasherInterface $passwordHasher)
- {
-     $this->passwordHasher=$passwordHasher;
-
- }
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
 
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
@@ -43,35 +42,66 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-                
-            $user = $form->getData();
+            $errors = $this->checkUser($user);
+            if (count($errors) === 0) {
+                $user = $form->getData();
 
-            // Si le mot de passe est modifié
-            if ($form->get('password')->getData()) {
-                $user->setPassword($this->passwordHasher->hashPassword(
-                    $user,
-                    $form->get('password')->getData()
-                ));
+                // Si le mot de passe est modifié
+                if ($form->get('password')->getData()) {
+                    $user->setPassword($this->passwordHasher->hashPassword(
+                        $user,
+                        $form->get('password')->getData()
+                    ));
+                }
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Profil mis à jour avec succès!');
+
+                // Redirection vers le même route pour voir les modifications
+                return $this->redirectToRoute('my_profile', [
+                    'id' => $user->getId()
+                ]);
+            }else{
+                foreach ($errors as $error) {
+                    $this->addFlash('error', $error);
+                } 
             }
-            
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Profil mis à jour avec succès!');
-
-            // Redirection vers le même route pour voir les modifications
-            return $this->redirectToRoute('my_profile', [
-                'id'=>$user->getId()
-            ]);
-        }else{
+        } else {
             // Si le formulaire n'est pas soumis, on rafraichit l'objet participant pour éviter les erreurs
             $entityManager->refresh($user);
         }
 
         return $this->render('user/my_profile.html.twig', [
             'form' => $form->createView(),
-            'user'=>$user,
+            'user' => $user,
         ]);
+    }
+    public function checkUser(User $user): array
+    {
+        $errors = [];
+        //get data from event
+        $email = $user->getEmail();
+        $password = $user->getPassword();
+        $firstName = $user->getFirstName();
+        $lastName = $user->getLastName();
+
+        //Check constraints
+        if (!$email) {
+            $errors[] = 'L\'email est obligatoire.';
+        }
+        if (!$password) {
+            $errors[] = 'Le mot de passe est obligatoire.';
+        }
+        if (!$firstName) {
+            $errors[] = 'Le prénom est obligatoire.';
+        }
+        if (!$lastName) {
+            $errors[] = 'Le nom est obligatoire.';
+        }
+
+        return $errors;
     }
 
     // #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
