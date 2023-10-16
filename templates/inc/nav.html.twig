@@ -22,6 +22,9 @@
 				</div>
 				<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 					{% if app.user %}
+							{% if  is_granted("ROLE_ADMIN") %}
+								<a href="{{ path('app_category_index')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Catégories</a>
+							{% endif %}
 						<a href="{{ path('my_profile')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Mon profil</a>
 						{% if app.user.artist %}
 							<a href="{{ path('app_artist_edit', {'id': app.user.artist.id} ) }}" class=" text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Ma fiche artiste</a> 

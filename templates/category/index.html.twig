@@ -1,30 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des catégories{% endblock %}
+{% block title %}Liste des catégories
+{% endblock %}
 
 {% block body %}
-    <h1>Liste des catégories</h1>
 
-    <table class="table">
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>
-                    <a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.name }}</a>
 
-                </td>
-                <td>
-                    {# <a href="{{ path('app_category_show', {'id': category.id}) }}">show</a> #}
-                    <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">Aucune catégorie trouvée</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<div class="flex  flex-col justify-center px-6 py-12 lg:px-8">
+		<div class="sm:mx-auto sm:w-full sm:max-w-sm">
+			<h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Liste des catégories</h2>
+		</div>
 
-    <a href="{{ path('app_category_new') }}">Créer une catégorie</a>
+		<div class="flex flex-col justify-center mt-10 sm:mx-auto sm:w-full sm:max-w-sm ">
+			<table class=" text-sm text-left text-gray-500 dark:text-gray-400 mb-4">
+				<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+					<tr>
+						<th scope="col" class="px-6 py-3">
+							Nom
+						</th>
+						<th scope="col" class="px-6 py-3">
+							Action
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for category in categories %}
+						<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+							<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+								{{ category.name }}
+							</th>
+							<td class="px-6 py-4">
+								<a href="{{ path('app_category_edit', {'id': category.id}) }}">Modifier / Supprimer</a>
+							</td>
+						</tr>
+						{# <a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.name }}</a> #}
+						{# <a href="{{ path('app_category_show', {'id': category.id}) }}">show</a> #}
+						{# <a href="{{ path('app_category_edit', {'id': category.id}) }}">Modifier</a> #}
+
+					{% else %}
+						<tr>
+							<td colspan="3" class="p-2 text-center text-gray-500">Aucune catégorie trouvée</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<div>
+				<a href="{{ path('app_category_new') }}" class="flex justify-center rounded-md bg-indigo-600 px-1 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Créer une catégorie</a>
+   
+            </div>
+		</div>
+	</div>
+
+
 {% endblock %}
