@@ -109,7 +109,8 @@
 		{% endfor %}
 	</td> #}
 <a href="{{ path('app_artist_index') }}">Voir tous les artistes</a>
-{% if app.user == artist.user %}<a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier ma fiche artiste</a>
-{% endif %}
+{% if app.user == artist.user or is_granted("ROLE_ADMIN") %}<a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier ma fiche artiste</a>
 {{ include('artist/_delete_form.html.twig') }}
+{% endif %}
+
 {% endblock %}

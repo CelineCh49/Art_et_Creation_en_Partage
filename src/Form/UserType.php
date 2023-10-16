@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -54,6 +55,10 @@ class UserType extends AbstractType
                     ]),
                 ],
             ])
+            // ->add('isAdmin', CheckboxType::class, [
+            //     'label' => 'Administrateur',
+            //     'required' => false,
+            // ]);
         ;
     }
 

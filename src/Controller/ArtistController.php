@@ -150,7 +150,7 @@ class ArtistController extends AbstractController
     public function edit(Request $request, Artist $artist, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
-        if ($artist->getUser() == $user) {
+        if ($artist->getUser() == $user || $this->isGranted("ROLE_ADMIN")) {
             $form = $this->createForm(ArtistType::class, $artist);
             $form->handleRequest($request);
 
