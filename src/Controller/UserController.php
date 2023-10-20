@@ -70,7 +70,7 @@ class UserController extends AbstractController
                 } 
             }
         } else {
-            // Si le formulaire n'est pas soumis, on rafraichit l'objet participant pour éviter les erreurs
+            // Si le formulaire n'est pas soumis, on rafraichit l'objet user pour éviter les erreurs
             $entityManager->refresh($user);
         }
 

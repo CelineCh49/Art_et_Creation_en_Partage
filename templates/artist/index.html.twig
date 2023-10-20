@@ -1,26 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des artistes{% endblock %}
+{% block title %}Liste des artistes
+{% endblock %}
 
 {% block body %}
-<div>
-    {% include 'artist/_filter.html.twig' %}
-</div>
 
-<section > <!--Les artistes-->
-  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
-      <div class="flex items-center justify-between pb-10">
-         <h2 class="text-2xl font-bold tracking-tight text-gray-900 ">Tous les artistes</h2>
-      </div>
 
-      <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-        {% for artist in artists %}
-            {% include 'artist/_card.html.twig'%}
-        {% else %}
-                <p>Aucun artiste trouvé<p>
-      {% endfor %} 
-      </div>
-  </div>
-</section>
+	<section>
+		<!--Les artistes-->
+		<div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
+			<div class="mb-6">
+				{% include 'artist/_filter.html.twig' %}
+			</div>
+			<div class="flex items-center justify-between pb-10">
+				<h2 class="text-2xl font-bold tracking-tight text-gray-900 ">Tous les artistes</h2>
+			</div>
+
+			<div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+
+				{% for artist in artists %}
+					{% include 'artist/_card.html.twig'%}
+				{% else %}
+					<p>Aucun artiste trouvé</p>
+
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+  	
 
 {% endblock %}

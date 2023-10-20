@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+use function PHPUnit\Framework\isEmpty;
+
 #[Route('/artist')]
 class ArtistController extends AbstractController
 {
@@ -55,8 +57,8 @@ class ArtistController extends AbstractController
             if (count($errors) === 0) {
 
                 //ArtisteName to uppercase
-                $name = $form->get('artistName')->getData(); //TODO:utilité de mettre en majuscule? ne permet pas de mettre des noms d'artistes proches
-                $upperName = mb_strtoupper($name, 'UTF-8'); //Uppercase and accent
+                $name = $form->get('artistName')->getData(); 
+                $upperName = ucfirst($name);
                 $artist->setArtistName($upperName);
                 $artist->setUser($user);
 
@@ -160,7 +162,7 @@ class ArtistController extends AbstractController
 
                     //ArtisteName to uppercase
                     $name = $form->get('artistName')->getData();
-                    $upperName = mb_strtoupper($name, 'UTF-8');
+                    $upperName = ucfirst($name);
                     $artist->setArtistName($upperName);
 
                     //Favorite Image
@@ -214,7 +216,7 @@ class ArtistController extends AbstractController
                         $this->addFlash('error', $error);
                     }
                 }
-            }
+            } 
             return $this->render('artist/edit.html.twig', [
                 'artist' => $artist,
                 'form' => $form,
@@ -288,6 +290,7 @@ class ArtistController extends AbstractController
         //get data from artist
         $artistName = $artist->getArtistName();
         $description = $artist->getDescription();
+        $categories = $artist->getCategories();
 
 
         //Check constraints
@@ -297,7 +300,7 @@ class ArtistController extends AbstractController
         if (!$description) {
             $errors[] = 'La description est obligatoire.';
         }
-
+       
         return $errors;
     }
 }

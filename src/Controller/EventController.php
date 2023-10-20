@@ -38,7 +38,9 @@ class EventController extends AbstractController
 
             $errors = $this->checkEvent($event);
             if (count($errors) === 0) {
-
+                $name = $form->get('name')->getData(); 
+                $upperName = ucfirst($name);
+                $event->setName($upperName);
                 //Favorite Image
                 //Get images uploaded
                 $favoriteImage = $form->get('favoriteImage')->getData();
@@ -122,7 +124,9 @@ class EventController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $errors = $this->checkEvent($event);
             if (count($errors) === 0) {
-
+                $name = $form->get('name')->getData(); 
+                $upperName = ucfirst($name);
+                $event->setName($upperName);
                 //Favorite Image
                 //Get images uploaded
                 $favoriteImage = $form->get('favoriteImage')->getData();

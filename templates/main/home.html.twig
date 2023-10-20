@@ -28,7 +28,7 @@
          <a href="{{path ('app_event_index')}}" class="underline" title='Voir tous les événements'>Voir tout</a>
       </div>
 
-      <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+      <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
       {% for event in events %}
             {% include 'event/_card.html.twig'%}
          {% endfor %} 
@@ -37,7 +37,7 @@
 </section>
 
 <section > <!--Les artistes-->
-  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
+   <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
       <div class="flex items-center justify-between pb-10">
          <h2 class="text-2xl font-bold tracking-tight text-gray-900 "> Les artistes</h2>
          <a href="{{path ('app_artist_index')}}" class="underline" title='Voir tous les artistes'>Voir tout</a>
@@ -46,7 +46,7 @@
       <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
       {% for artist in artists %}
             {% include 'artist/_card.html.twig'%}
-      {% endfor %} 
+         {% endfor %} 
       </div>
   </div>
 </section>
@@ -56,7 +56,7 @@
       <div class="flex items-center justify-between pb-10">
          <h2 class="text-2xl font-bold tracking-tight text-gray-900 "> Qui sommes-nous?</h2>
       </div>
-      <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+      <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
          <a href="{{path ('app_about_us')}}" title='A propos' class="group">
          <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
             <img src="{{asset('assets/images/barjac_header.jpg')}}" alt="a propos" class="h-full w-full object-cover object-center group-hover:opacity-75">
@@ -65,7 +65,7 @@
          </a>
       
          <a href="{{path ('app_apply')}}" title='Appel à candidature' class="group">
-         <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+         <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-3 xl:aspect-w-7">
             <img src="{{asset('assets/images/barjac_header.jpg')}}" alt="a propos" class="h-full w-full object-cover object-center group-hover:opacity-75">
          </div>
          <h3 class="mt-1 text-lg font-medium text-gray-900">Appel à candidature</h3>

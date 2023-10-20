@@ -4,113 +4,135 @@
 	{{artist.artistName}}
 {% endblock %}
 
+
 {% block body %}
+	
 
-	<div >
-		<div class="pt-6">
-			<!-- Artist info -->
-			<div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
-				<div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-					<h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{artist.artistName}}</h1>
-					<div class="text-sm text-gray-500">
-						{% for category in artist.categories %}
-							#{{ category.name }}
+
+	<div class="pt-6">
+		<div class="flex justify-end pr-10">
+			<a href="{{ path('app_artist_index') }}" class="underline">Voir tous les artistes</a>
+		</div>
+
+		<!-- Artist info -->
+		<div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+
+			<div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+				<h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{artist.artistName}}</h1>
+				<div class="text-sm text-gray-500">
+					{% for category in artist.categories %}
+						#{{ category.name }}
+					{% endfor %}
+				</div>
+			</div>
+
+			<!-- Favorite Image -->
+			<div class="mt-4 lg:row-span-3 lg:mt-0">
+				<img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite" height="150">
+			</div>
+
+			<div
+				class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
+				<!-- Description and details -->
+				<div>
+					<div class="space-y-6">
+						<p class="text-base text-gray-900">{{ artist.description }}</p>
+					</div>
+				</div>
+
+				<div class="mt-10">
+					<h3 class="text-sm font-medium text-gray-900">Contacts:</h3>
+
+					<div class="mt-4">
+						<ul role="list" class="list-disc space-y-2 pl-4 text-sm">
+							{% if artist.email != null %}
+								<li class="text-gray-400">
+									<span class="text-gray-600">Email:
+										{{ artist.email }}
+									</span>
+								</li>
+							{% endif %}
+							{% if artist.telephone != null %}
+								<li class="text-gray-400">
+									<span class="text-gray-600">Téléphone:
+										{{ artist.telephone }}
+									</span>
+								</li>
+							{% endif %}
+							{% if artist.websiteLink != null %}
+								<li class="text-gray-400">
+									<span class="text-gray-600 ">Site internet:
+										<a href="{{ artist.websiteLink }}" target="_blank" class="underline">{{ artist.websiteLink }}</a>
+									</span>
+								</li>
+							{% endif %}
+							{% if artist.facebookLink != null %}
+								<li class="text-gray-400">
+									<span class="text-gray-600">Facebook:
+										<a href="{{ artist.facebookLink }}" target="_blank" class="underline">{{ artist.facebookLink }}</a>
+									</span>
+								</li>
+							{% endif %}
+							{% if artist.instagramLink != null %}
+								<li class="text-gray-400">
+									<span class="text-gray-600">Instagram:
+										<a href="{{ artist.instagramLink }}" target="_blank" class="underline">{{ artist.instagramLink }}</a>
+									</span>
+								</li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+
+				<div class="mt-10">
+					<h2 class="text-sm font-medium text-gray-900">Evénements participés :</h2>
+					<div class="mt-4 flex">
+						{% for event in artist.events %}
+							<div class="text-gray-600 font-semibold underline container">
+								<a href="{{ path('app_event_show', {'id': event.id}) }}">{{ event.name }}</a>
+							</div>
 						{% endfor %}
-					</div>
-				</div>
-
-				<!-- Favorite Image -->
-				<div class="mt-4 lg:row-span-3 lg:mt-0">
-					<img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite" height="150">
-				</div>
-
-				<div class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-					<!-- Description and details -->
-					<div>
-						<div class="space-y-6">
-							<p class="text-base text-gray-900">{{ artist.description }}</p>
-						</div>
-					</div>
-
-					<div class="mt-10">
-						<h3 class="text-sm font-medium text-gray-900">Contacts:</h3>
-
-						<div class="mt-4">
-							<ul role="list" class="list-disc space-y-2 pl-4 text-sm">
-								{% if artist.email != null %}
-									<li class="text-gray-400">
-										<span class="text-gray-600">Email:
-											{{ artist.email }}
-										</span>
-									</li>
-								{% endif %}
-								{% if artist.telephone != null %}
-									<li class="text-gray-400">
-										<span class="text-gray-600">Téléphone:
-											{{ artist.telephone }}
-										</span>
-									</li>
-								{% endif %}
-								{% if artist.websiteLink != null %}
-									<li class="text-gray-400">
-										<span class="text-gray-600 ">Site internet:
-											<a href="{{ artist.websiteLink }}" target="_blank" class="underline">{{ artist.websiteLink }}</a>
-										</span>
-									</li>
-								{% endif %}
-								{% if artist.facebookLink != null %}
-									<li class="text-gray-400">
-										<span class="text-gray-600">Facebook:
-											<a href="{{ artist.facebookLink }}" target="_blank" class="underline">{{ artist.facebookLink }}</a>
-										</span>
-									</li>
-								{% endif %}
-								{% if artist.instagramLink != null %}
-									<li class="text-gray-400">
-										<span class="text-gray-600">Instagram:
-											<a href="{{ artist.instagramLink }}" target="_blank" class="underline">{{ artist.instagramLink }}</a>
-										</span>
-									</li>
-								{% endif %}
-							</ul>
-						</div>
-					</div>
-
-					<div class="mt-10">
-						<h2 class="text-sm font-medium text-gray-900">Evénements participés :</h2>
-						<div class="mt-4 flex">
-							{% for event in artist.events %}
-								<div class="text-gray-600 font-semibold underline container">
-									<a href="{{ path('app_event_show', {'id': event.id}) }}">{{ event.name }}</a>
-								</div>
-							{% endfor %}
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		<!-- Image gallery -->
+		<div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 ">
+			{% for image in artist.artistImages %}
+				<div class="aspect-h-4 aspect-w-3  overflow-hidden rounded-lg lg:block">
+					<img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="{{image.fileName}}" class="h-full w-full object-cover object-center">
+				</div>
+			{% endfor %}
+		</div>
+		
+		{% if is_granted("ROLE_ADMIN") or app.user in artist.user %}	
+		<div class="pt-4">	
+		<button class="flex justify-center mx-auto rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4">
+				<a href="{{ path('app_artist_edit', {'id': artist.id}) }}">
+					Modifier la fiche artiste</a>
+				{# {{ include('artist/_delete_form.html.twig') }} #}
+		</button>
+		</div>
+		{% endif %}
+		{% if is_granted("ROLE_ADMIN")  %}	
+		<div class= "flex justify-center py-4">
+		<div class="inline-block mx-auto rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 mt-4">
+        {{ include('artist/_delete_form.html.twig') }}
+		</div>
+	   	</div>
+
+		{% endif %}
+
 	</div>
-</div>
-    <!-- Image gallery -->
-    <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 ">
-        {% for image in artist.artistImages %}
-        <div class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
-            <img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="{{image.fileName}}" class="h-full w-full object-cover object-center">
-        </div>		
-	{% endfor %}
-    </div>
-
-
-	{# <th>Evénements participés</th>
-	<td>
-		{% for event in artist.events %}
-			<a href="{{ path('app_event_show', {'id': event.id}) }}">
-				<img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" height="150">{{ event.name }}</a>
-		{% endfor %}
-	</td> #}
-<a href="{{ path('app_artist_index') }}">Voir tous les artistes</a>
-{% if app.user == artist.user or is_granted("ROLE_ADMIN") %}<a href="{{ path('app_artist_edit', {'id': artist.id}) }}">Modifier ma fiche artiste</a>
-{{ include('artist/_delete_form.html.twig') }}
-{% endif %}
 
 {% endblock %}
+
+
+{# <th>Evénements participés</th>
+			<td>
+				{% for event in artist.events %}
+					<a href="{{ path('app_event_show', {'id': event.id}) }}">
+						<img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" height="150">{{ event.name }}</a>
+				{% endfor %}
+			</td> #}

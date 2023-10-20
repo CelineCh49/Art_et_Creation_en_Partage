@@ -22,20 +22,14 @@ class ArtistFilterForm extends AbstractType
                     'placeholder'=> 'Rechercher'
                 ]
                 ])
-                // ->add('categories', EntityType::class,[
-                //     'class'=> Category::class,
-                //     'label'=>false,
-                //     'required'=>false,
-                //     'expanded'=>true, // Checkbox list
-                //     'multiple'=>true // Checkbox list
-                //     ])
+    
                 ->add('category', EntityType::class,[
                     'class' => Category::class,
                     'choice_label' => 'name', 
                     'label' => 'Catégorie : ',
                     'placeholder' => 'Sélectionnez une catégorie', 
                     'required' => false, 
-                    // 'multiple' => true, // Enable multiple selections
+ 
                 ])
             ;
     }

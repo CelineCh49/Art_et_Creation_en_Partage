@@ -45,7 +45,8 @@ class Artist
     private ?string $email = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Regex(pattern:  '/^0[1-9]([-. ]?[0-9]{2}){4}$/')] // for french format //TODO: changer pour  le regex pour l'international
+    #[Assert\Regex(pattern:  '/^0[1-9]([-. ]?[0-9]{2}){4}$/',
+        message: 'Le numéro de téléphone doit être au format français valide, par exemple, 01-23-45-67-89.',)] // for french format //TODO: changer pour  le regex pour l'international
     private ?string $telephone = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -64,6 +65,7 @@ class Artist
     private ?User $user = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'artists')]
+    #[Assert\NotBlank(message: 'Veuillez sélectionner au moins une catégorie')]
     private Collection $categories;
 
     #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'artists',)]

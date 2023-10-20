@@ -24,6 +24,7 @@ class ArtistType extends AbstractType
         ->add('artistName',TextType::class,[
             'label'=> 'Nom d\'artiste :',
             'required' => true,
+            
         ])
         // ->add('firstName',TextType::class,[
         //     'label'=> 'Prénom :',
@@ -43,6 +44,7 @@ class ArtistType extends AbstractType
         ->add('email',EmailType::class,[
             'label'=> 'Email :',
             'required' => false,
+            
         ])
         ->add('telephone',TelType::class,[
             'label'=> 'Téléphone :',
@@ -50,7 +52,8 @@ class ArtistType extends AbstractType
             'attr' => [
                 'pattern' => '/^0[1-9]([-. ]?[0-9]{2}){4}$/', 
                 'title' => 'Un numéro de téléphone valide doit comporter 10 chiffres.'
-            ]
+            ],
+            
         ])
         ->add('websiteLink',TextType::class,[
             'label'=> 'lien de votre site internet :',
@@ -82,6 +85,8 @@ class ArtistType extends AbstractType
                 'required' => false, 
                 'expanded' => true,//checkbox style
                 'multiple' => true, // Enable multiple selections
+                
+                
             ])
             
             ->add('events', EntityType::class,[
@@ -94,7 +99,7 @@ class ArtistType extends AbstractType
                 'required' => false, 
             ])
             ->add('favoriteImage', FileType::class, [
-                'label' => 'Image favorite: Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Valider" ou "Modifier" ',
+                'label' => 'Image favorite: Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Valider" ',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -110,7 +115,7 @@ class ArtistType extends AbstractType
                 ],
             ])
             ->add('images', FileType::class, [
-                'label' => 'Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Valider" ou "Modifier" ',
+                'label' => 'Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Valider" ',
     
                 // unmapped means that this field is not associated to any entity property
                 //So we can handle images ourself in ArtistController
