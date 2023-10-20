@@ -1,10 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}A propos de nous{% endblock %}
+{% block title %}A propos de nous
+{% endblock %}
 
 {% block body %}
-<h1>A propos de nous</h1>
-<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</div>
-<a href="{{ path('app_main') }}">Retour à l'accueil</a>
+
+	<div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
+
+		<div class="flex items-center justify-between pb-10">
+			<h2 class="text-2xl font-bold tracking-tight text-gray-900 ">
+				A propos de nous</h2>
+		</div>
+
+		<p>
+			L’association
+			<strong>Art et Création en Partage</strong>
+			regroupe à la base deux artistes qui, soucieux de sortir des expositions classiques et conventionnelles, ont décidés de se regrouper en association selon la loi 1901. Le but de l’association est la création d’évènements qui favorisent la promotion des artistes de toutes discipline, de donner une visibilité à des artistes confirmés ou débutants
+		</p>
+        <br>
+		<p>
+			Très vite, des personnes passionnées d’art se sont associes bénévolement au groupe de base pour la création d’un évènement qui a lieu chaque année maintenant début septembre :
+			<strong>Barjac, hors des sentiers battus</strong>.
+		</p>
+        <br>
+		<p>
+			<em>Nos artistes :</em>
+			Chaque année ,nous sélectionnons des artistes en fonction de nos coups de cœur, de la beauté de leur création, de l’histoire de l’œuvre, de la maîtrise de leur technique, de leur regard atypique, du message apporté...bref nous nous laissons guider par nos émotions.
+		</p>
+        <br>
+		<p>
+			<em>Le lieu  :</em>
+			nous privilégions les endroits atypiques et non des salles d’expositions traditionnelles. Cela permet aux artistes de mettre leurs en valeurs différemment et au public de découvrir des lieux, de prendre le temps de découvrir les œuvres et les auteurs.
+		</p>
+        <br>
+<p>
+			<em>Nos évènements : </em>
+			Cela fait 2 ans que nous organisons une balade artistique à Barjac, petite ville du Gard où l’Art a toute sa place. 
+Chaque année nous sélectionnons une vingtaine d’artistes pour cette rencontre conviviale entre artistes et avec le public qui a lieu durant tout un week-end début septembre.
+En 2023, l’évènement "Barjac, hors des sentiers battus" a pris ses quartiers dans 1 mas privé, les artistes ont exposé tant à l’extérieur qu’à l’intérieur pour un week-end festif avec musique, buvette et petite restauration.
+
+		</p>
+        <br>
+
+		<a href="{{ path('app_main') }}" class="underline hover:text-teal-600">Retour à l'accueil</a>
+		<div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
+			<img src="{{ asset('assets/images/main_photo5.jpg') }}" alt="a propos" class=" h-96 object-cover object-center group-hover:opacity-75 rounded-lg ">
+			<img src="{{ asset('assets/images/main_photo4.jpg') }}" alt="a propos" class=" h-96 object-cover object-center group-hover:opacity-75 rounded-lg ">
+			<img src="{{ asset('assets/images/main_photo3.jpg') }}" alt="a propos" class=" h-96 object-cover object-center group-hover:opacity-75 rounded-lg">
+		</div>
+	</div>
+
 {% endblock %}
