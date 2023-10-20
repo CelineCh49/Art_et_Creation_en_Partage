@@ -1,63 +1,61 @@
+<nav>
+	<div class="flex items-center justify-between text-gray-300 text-lg font-semibold px-10">
+		<div class="flex lg:flex-row sm:flex-col flex-col">
 
-<header class="h-[300px] flex flex-col">
-	<nav class="bg-gray-800">
-		<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-			<div class="relative flex h-16 items-center justify-between">
-				
-				<div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-					<div class="flex flex-shrink-0 items-center"><!-- logo-->
-						<img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Art et création en partage">
+			<div>
+				<a href="{{path('app_main')}}" class=" hover:bg-gray-700 hover:text-white rounded-md px-4 py- ">Accueil</a>
+			</div>
+			<div>
+				<a href="{{path('app_about_us')}}" class="hover:bg-gray-700 hover:text-white rounded-md px-4 py-2">A propos</a>
+			</div>
+			<div>
+				<a href="{{path('app_event_index')}}" class="hover:bg-gray-700 hover:text-white rounded-md px-4 py-2">Evénements</a>
+			</div>
+			<div>
+				<a href="{{path('app_artist_index')}}" class="hover:bg-gray-700 hover:text-white rounded-md px-4 py-2">Artistes</a>
+			</div>
+			<div>
+				<a href="{{path('app_contact')}}" class="hover:bg-gray-700 hover:text-white rounded-md px-4 py-2">Contact</a>
+			</div>
+
+		</div>
+
+		<div class="flex items-center lg:flex-row sm:flex-col flex-col">
+			
+				{% if app.user %}
+					<div>
+						{% if  is_granted("ROLE_ADMIN") %}
+							<a href="{{ path('app_category_index')}}" class="hover:bg-gray-700 hover:text-white rounded-md px-4 py-2">Catégories</a>
+						{% endif %}
 					</div>
-					<div class="hidden sm:ml-6 sm:block "> <!-- items nav link-->
-						<div class="flex space-x-4">
-							<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-							{# <a href="{{path('app_main')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Accueil</a> #}
-							<a href="{{path('app_main')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"> Accueil</a>
-							<a href="{{path('app_about_us')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">A propos</a>
-							<a href="{{path('app_event_index')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Evénements</a>
-							<a href="{{path('app_artist_index')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Artistes</a>
-							<a href="{{path('app_contact')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
+					<div>
+						{% if app.user.artist %}
+							<a href="{{ path('app_artist_edit', {'id': app.user.artist.id} ) }}" class=" hover:bg-gray-700 hover:text-white rounded-md px-4 py-2">Ma fiche artiste</a>
+						{% else %}
+							<a href="{{ path('app_artist_new')}}" class=" hover:bg-gray-700 hover:text-white rounded-md px-4 py-2">Créer une fiche artiste</a>
+						{% endif %}
+					</div>
+
+					<div>
+						<a href="{{ path('my_profile')}}" class="hover:bg-gray-700 hover:text-white rounded-md px-4 py-2">Mon profil</a>
+					</div>
+					<div>
+						<a href="{{ path('app_logout')}}" class="hover:bg-gray-700 hover:text-white rounded-md px-4 py-2">Déconnexion</a>
+					</div>
+					<div class="text-gray-300 px-4 py-2 text-sm font-medium">
+						{{ app.user.userIdentifier }}
+					</div>
+
+				{% else %}
+					<div class="flex items-center lg:flex-row sm:flex-col flex-col">
+						<div>
+							<a href="{{ path('app_register')}}" class="hover:bg-gray-700 hover:text-white rounded-md px-3 py-2">S'inscrire</a>
+						</div>
+						<div>
+							<a href="{{ path('app_login')}}" class="hover:bg-gray-700 hover:text-white rounded-md px-3 py-2">Se connecter</a>
 						</div>
 					</div>
-				</div>
-				<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-					{% if app.user %}
-							{% if  is_granted("ROLE_ADMIN") %}
-								<a href="{{ path('app_category_index')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Catégories</a>
-							{% endif %}
-						<a href="{{ path('my_profile')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Mon profil</a>
-						{% if app.user.artist %}
-							<a href="{{ path('app_artist_edit', {'id': app.user.artist.id} ) }}" class=" text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Ma fiche artiste</a> 
-						{% else %}
-							<a href="{{ path('app_artist_new')}}" class=" text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Créer une fiche artiste</a> 
-						{% endif %}
-						<a href="{{ path('app_logout')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Déconnexion</a>
-						<span class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ app.user.userIdentifier }}</span>
-					{% else %}
-								<a href="{{ path('app_register')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">S'inscrire</a>
-								<a href="{{ path('app_login')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Se connecter</a>
-					{% endif %}
-				</div>
-			</div>
-		</div>
-
-		<!-- Mobile menu, show/hide based on menu state. -->
-		<div class="sm:hidden" id="mobile-menu">
-			<div
-				class="space-y-1 px-2 pb-3 pt-2">
-				<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-				<a href="{{path('app_main')}}" class="ttext-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"> Accueil</a>
-				<a href="{{path('app_about_us')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">A propos</a>
-				<a href="{{path('app_event_index')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Evénements</a>
-				<a href="{{path('app_artist_index')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Artistes</a>
-				<a href="{{path('app_contact')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Contact</a>
-			</div>
+				{% endif %}
+			
 		</div>
 	</nav>
-	<div class="flex-1 flex flex-col justify-center text-white bg-gradient-to-r from-lime-900 to-lime-400 ">
-	{% block header_title %}
-            <h1 class="text-4xl pl-20 ">Art et création en partage</h1>
-            <p class="text-xl pl-20">Promotion d'artistes en tout domaine</p>
-	{% endblock %}		
-    </div>
-</header>
