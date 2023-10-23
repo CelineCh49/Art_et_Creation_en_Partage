@@ -45,6 +45,9 @@ class ArtistRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+   
+
+    
     // public function findOneByArtistName($artistName): ?Artist
     //    {
     //        return $this->createQueryBuilder('a')

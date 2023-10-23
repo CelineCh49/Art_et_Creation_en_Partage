@@ -1,37 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact{% endblock %}
+{% block title %}Contact
+{% endblock %}
 
 {% block body %}
-Nous sommes toujours à la recherche de nouveaux talents donc n’hésitez pas à nous parler de vous.
-Pour participer à nos évènements, envoyez nous par mail à : artetcreationenpartage@gmail.com
--un texte expliquant qui vous êtes, ce que vous faites
--votre démarche artistiques
--quelques photos de vos créations
--un lien vers un site ou un réseau social ou nous pouvons voir votre travail
- 
-Nous contacter :
-mail : artetcreationenpartage@gmail.com
-tel : 0640166505 Françoise Gerlache, présidente de l’association
+	<div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
+
+		<div class="flex items-center justify-between pb-10">
+			<h2 class="text-2xl font-bold tracking-tight text-gray-900 ">
+				Contact</h2>
+		</div>
 
 
-<div>
-    <h1>Contact</h1>
-    <div>
-        Si vous voulez nous contacter pour des renseignements:
-    </div>
-    <div>
-        inclure liens sociaux
-    </div>
-</div>
-<div>
-    <h1>Nous rejoindre</h1>
-    <div>
-        Si vous voulez faire partie des artistes pour la prochaine exposition, merci de lire 
-        <a href="{{path ('app_apply')}}" title='Appel à candidature'>l'appel à candidature</a>
-          puis de compléter ce formulaire : nous rejoindre (faire un formulaire qui sera envoyé en mail mais pas intégré dans base)
-    </div>
-    
-</div>
+		<div>
+			<p>Pour nous contacter :</p>
+			<ul role="list" class="list-disc space-y-2 pl-10 pt-2 pb-4">
+				<li>Email:
+					<a href="mailto:artetcreationenpartage@gmail.com" class="underline hover:text-teal-800">
+						artetcreationenpartage@gmail.com</a>
+				</li>
+				<li>Tél : 0640166505,  Françoise Gerlache, présidente de l’association</li>
+			</ul>
+
+			<div>
+				<p>Nous sommes toujours à la recherche de nouveaux talents.</p>
+				<p>Si vous voulez faire partie des artistes pour la prochaine exposition, merci de lire
+					<a href="{{ path ('app_apply')}}" title='Appel à candidature' class="underline hover:text-teal-800">l'appel à candidature.</a>
+				</p>
+			</div>
+            <div class="pt-4">
+            <a href="{{ path('app_main') }}" class="underline hover:text-teal-600">Retour à l'accueil</a>
+            </div>
+            
+		</div>
+
+		
+		<div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
+			<img src="{{ asset('assets/images/main_photo5.jpg') }}" alt="a propos" class=" h-96 object-cover object-center group-hover:opacity-75 rounded-lg ">
+			<img src="{{ asset('assets/images/main_photo4.jpg') }}" alt="a propos" class=" h-96 object-cover object-center group-hover:opacity-75 rounded-lg ">
+			<img src="{{ asset('assets/images/main_photo3.jpg') }}" alt="a propos" class=" h-96 object-cover object-center group-hover:opacity-75 rounded-lg">
+		</div>
+	</div>
 
 {% endblock %}

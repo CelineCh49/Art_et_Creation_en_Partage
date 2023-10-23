@@ -15,10 +15,20 @@ class MainController extends AbstractController
     {
         $events= $eventRepository->findAll();
         $artists= $artistRepository->findAll();
+
+        // Random artists
+        shuffle($artists); // Random 
+        $randomArtists = array_slice($artists, 0, 4); // Select the first 4 artists 
+       
+
         return $this->render('main/home.html.twig', [
             'events'=> $events,
             'artists' =>$artists,
+            'randomArtists' => $randomArtists,
             'controller_name' => 'MainController',
         ]);
     }
 }
+
+
+//récup tous les id des artistes
