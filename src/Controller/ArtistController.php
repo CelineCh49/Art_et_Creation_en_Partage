@@ -19,7 +19,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 use function PHPUnit\Framework\isEmpty;
 
-#[Route('/artist')]
+#[Route('/artiste')]
 class ArtistController extends AbstractController
 {
     #[Route('/', name: 'app_artist_index', methods: ['GET'])]
@@ -36,7 +36,7 @@ class ArtistController extends AbstractController
     }
 
     #[IsGranted("ROLE_USER")]
-    #[Route('/new', name: 'app_artist_new', methods: ['GET', 'POST'])]
+    #[Route('/creation', name: 'app_artist_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
@@ -148,7 +148,7 @@ class ArtistController extends AbstractController
     }
 
     #[IsGranted("ROLE_USER")]
-    #[Route('/{id}/edit', name: 'app_artist_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modification', name: 'app_artist_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Artist $artist, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();

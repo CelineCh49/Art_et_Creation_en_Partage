@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
-#[Route('/user')]
+#[Route('/utilisateur')]
 class UserController extends AbstractController
 {
     // Ajout du constructeur pour le password hasher pour pouvoir éditer le profil
@@ -35,7 +35,7 @@ class UserController extends AbstractController
     }
 
     #[IsGranted("ROLE_USER")]
-    #[Route('/my_profile', name: 'my_profile')]
+    #[Route('/mon_profil', name: 'my_profile')]
     public function afficherMonProfil(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser(); 
@@ -138,7 +138,7 @@ class UserController extends AbstractController
     }
  
     #[IsGranted("ROLE_ADMIN")]
-    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modification', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UserType::class, $user);

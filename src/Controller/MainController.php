@@ -31,4 +31,3 @@ class MainController extends AbstractController
 }
 
 
-//récup tous les id des artistes

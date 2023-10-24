@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ApplyController extends AbstractController
 {
-    #[Route('/apply', name: 'app_apply')]
+    #[Route('/appel_a candidature', name: 'app_apply')]
     public function index(): Response
     {
         return $this->render('apply/apply.html.twig', [

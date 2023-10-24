@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/event')]
+#[Route('/evenement')]
 class EventController extends AbstractController
 {
     #[Route('/', name: 'app_event_index', methods: ['GET'])]
@@ -27,7 +27,7 @@ class EventController extends AbstractController
     }
 
     #[IsGranted("ROLE_ADMIN")]
-    #[Route('/new', name: 'app_event_new', methods: ['GET', 'POST'])]
+    #[Route('/creation', name: 'app_event_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, ArtistRepository $artistRepository): Response
     {
         $event = new Event();
@@ -115,7 +115,7 @@ class EventController extends AbstractController
     }
 
     #[IsGranted("ROLE_ADMIN")]
-    #[Route('/{id}/edit', name: 'app_event_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modification', name: 'app_event_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Event $event, EntityManagerInterface $entityManager, ArtistRepository $artistRepository, EventRepository $eventRepository): Response
     {
         $form = $this->createForm(EventType::class, $event);
