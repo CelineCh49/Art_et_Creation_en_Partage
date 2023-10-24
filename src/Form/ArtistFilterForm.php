@@ -27,7 +27,7 @@ class ArtistFilterForm extends AbstractType
                     'class' => Category::class,
                     'choice_label' => 'name', 
                     'label' => 'Catégorie : ',
-                    'placeholder' => 'Sélectionnez une catégorie', 
+                    'placeholder' => 'Toutes les catégories', 
                     'required' => false, 
  
                 ])

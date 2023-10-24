@@ -48,7 +48,7 @@
 							{% if artist.email != null %}
 								<li class="text-gray-400">
 									<span class="text-gray-600">Email:
-										{{ artist.email }}
+										<a href="mailto: {{ artist.email }}">{{ artist.email }}</a>
 									</span>
 								</li>
 							{% endif %}
