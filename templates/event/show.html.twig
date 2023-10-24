@@ -76,19 +76,21 @@
 					</div>
 				</div>
 
-				{# <div class="mt-10">
-									<h2 class="text-sm font-medium text-gray-900">Artistes :</h2>
-									<div class="mt-4 flex">
-										{% for artist in event.artists %}
-											<div class="text-gray-600 font-semibold underline container">
-												<a href="{{ path('app_event_show', {'id': artist.id}) }}">{{ artist.artistName }}</a>
-											</div>
-										{% endfor %}
-									</div>
-								</div> #}
+				
 			</div>
 		</div>
+		<!--buttons-->
+		<div class="flex justify-center space-x-4">
+			{% if  is_granted("ROLE_ADMIN") %}
+				<div class="flex justify-center my-2 rounded-md bg-teal-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 mt-4">
+					<a href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
+				</div>
 
+				<div class="flex">
+					{{ include('event/_delete_form.html.twig') }}
+				</div>
+			{% endif %}
+		</div>
 		<!-- Image gallery -->
 		<div class="mx-auto mt-2 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 gap-y-10 ">
 			{% for image in event.eventImages %}
@@ -100,22 +102,22 @@
 
 		<!-- Artist list -->
 		{# <div>
-					{% for artist in event.artists %}
-						<a href="{{ path('app_artist_show', {'id': artist.id}) }}">
-							<img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite" height="150">
-							{{ artist.artistName }}</a>
-					{% endfor %}
-				</div> #}
+									{% for artist in event.artists %}
+										<a href="{{ path('app_artist_show', {'id': artist.id}) }}">
+											<img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite" height="150">
+											{{ artist.artistName }}</a>
+									{% endfor %}
+								</div> #}
 
 
 		{# <h3>Artistes</h3>
-		        <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-		        {% for artist in event.artists %}
-		            {% include 'artist/_card.html.twig'%}
-		        {% else %}
-		                <p>Aucun artiste trouvé<p>
-		      {% endfor %} 
-		      </div> #}
+						        <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+						        {% for artist in event.artists %}
+						            {% include 'artist/_card.html.twig'%}
+						        {% else %}
+						                <p>Aucun artiste trouvé<p>
+						      {% endfor %} 
+						      </div> #}
 
 			<section>
 			<!--Les artistes-->
@@ -133,15 +135,7 @@
 			</div>
 		</section>
 
-	{% if  is_granted("ROLE_ADMIN") %}
-		<button class="flex justify-center mx-auto my-2 rounded-md bg-teal-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 mt-4">	
-				<a href="{{ path('app_event_edit', {'id': event.id}) }}">Modifier</a>
-		</button>
-		
-		<div >
-                    {{ include('event/_delete_form.html.twig') }}
-		</div>
-		{% endif %}
+
 	</div>
 
 

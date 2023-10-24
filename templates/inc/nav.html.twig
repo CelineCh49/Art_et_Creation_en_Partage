@@ -30,7 +30,7 @@
 					</div>
 					<div>
 						{% if app.user.artist %}
-							<a href="{{ path('app_artist_edit', {'id': app.user.artist.id} ) }}" class=" hover:bg-gray-700 hover:text-white rounded-md px-4 py-2">Ma fiche artiste</a>
+							<a href="{{ path('app_artist_show', {'id': app.user.artist.id} ) }}" class=" hover:bg-gray-700 hover:text-white rounded-md px-4 py-2">Ma fiche artiste</a>
 						{% else %}
 							<a href="{{ path('app_artist_new')}}" class=" hover:bg-gray-700 hover:text-white rounded-md px-4 py-2">Créer une fiche artiste</a>
 						{% endif %}
