@@ -11,7 +11,7 @@
 
 	<div class="pt-6">
 		<div class="flex justify-end pr-10">
-			<a href="{{ path('app_artist_index') }}" class="underline">Voir tous les artistes</a>
+			<a href="{{ path('app_artist_index') }}" class="underline hover:text-teal-800">Voir tous les artistes</a>
 		</div>
 
 		<!-- Artist info -->
@@ -48,7 +48,7 @@
 							{% if artist.email != null %}
 								<li class="text-gray-400">
 									<span class="text-gray-600">Email:
-										<a href="mailto: {{ artist.email }}">{{ artist.email }}</a>
+										<a href="mailto: {{ artist.email }}" class="underline hover:text-teal-800">{{ artist.email }}</a>
 									</span>
 								</li>
 							{% endif %}
@@ -62,21 +62,21 @@
 							{% if artist.websiteLink != null %}
 								<li class="text-gray-400">
 									<span class="text-gray-600 ">Site internet:
-										<a href="{{ artist.websiteLink }}" target="_blank" class="underline">{{ artist.websiteLink }}</a>
+										<a href="{{ artist.websiteLink }}" target="_blank" class="underline hover:text-teal-800">{{ artist.websiteLink }}</a>
 									</span>
 								</li>
 							{% endif %}
 							{% if artist.facebookLink != null %}
 								<li class="text-gray-400">
 									<span class="text-gray-600">Facebook:
-										<a href="{{ artist.facebookLink }}" target="_blank" class="underline">{{ artist.facebookLink }}</a>
+										<a href="{{ artist.facebookLink }}" target="_blank" class="underline hover:text-teal-800">{{ artist.facebookLink }}</a>
 									</span>
 								</li>
 							{% endif %}
 							{% if artist.instagramLink != null %}
 								<li class="text-gray-400">
 									<span class="text-gray-600">Instagram:
-										<a href="{{ artist.instagramLink }}" target="_blank" class="underline">{{ artist.instagramLink }}</a>
+										<a href="{{ artist.instagramLink }}" target="_blank" class="underline hover:text-teal-800">{{ artist.instagramLink }}</a>
 									</span>
 								</li>
 							{% endif %}
@@ -88,7 +88,7 @@
 					<h2 class="text-sm font-medium text-gray-900">Evénements participés :</h2>
 					<div class="mt-4 flex">
 						{% for event in artist.events %}
-							<div class="text-gray-600 font-semibold underline container">
+							<div class="text-gray-600 font-semibold underline hover:text-teal-800 container">
 								<a href="{{ path('app_event_show', {'id': event.id}) }}">{{ event.name }}</a>
 							</div>
 						{% endfor %}

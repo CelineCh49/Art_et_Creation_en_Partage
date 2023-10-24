@@ -12,7 +12,7 @@
 			{{ include('artist/_form.html.twig') }}
 		</div>
 		<div>
-			<a href="{{ path('app_artist_show', {'id': artist.id}) }}" class="underline">Retour sur ma fiche</a>
+			<a href="{{ path('app_artist_show', {'id': artist.id}) }}" class="underline hover:text-teal-800">Retour sur ma fiche</a>
 			{{ include('artist/_delete_form.html.twig') }}
 		</div>
 		<div class="flex flex-col">

@@ -8,7 +8,7 @@
 
 	<div class="pt-6">
 		<div class="flex justify-end pr-10">
-			<a href="{{ path('app_event_index') }}" class="underline">Voir tous les événements</a>
+			<a href="{{ path('app_event_index') }}" class="underline hover:text-teal-800">Voir tous les événements</a>
 		</div>
 
 		<!-- Event info -->
@@ -54,21 +54,21 @@
 							{% if event.websiteLink != null %}
 								<li class="text-gray-400">
 									<span class="text-gray-600 ">Site internet:
-										<a href="{{ event.websiteLink }}" target="_blank" class="underline">{{ event.websiteLink }}</a>
+										<a href="{{ event.websiteLink }}" target="_blank" class="underline hover:text-teal-800">{{ event.websiteLink }}</a>
 									</span>
 								</li>
 							{% endif %}
 							{% if event.facebookLink != null %}
 								<li class="text-gray-400">
 									<span class="text-gray-600">Facebook:
-										<a href="{{ event.facebookLink }}" target="_blank" class="underline">{{ event.facebookLink }}</a>
+										<a href="{{ event.facebookLink }}" target="_blank" class="underline hover:text-teal-800">{{ event.facebookLink }}</a>
 									</span>
 								</li>
 							{% endif %}
 							{% if event.instagramLink != null %}
 								<li class="text-gray-400">
 									<span class="text-gray-600">Instagram:
-										<a href="{{ event.instagramLink }}" target="_blank" class="underline">{{ event.instagramLink }}</a>
+										<a href="{{ event.instagramLink }}" target="_blank" class="underline hover:text-teal-800">{{ event.instagramLink }}</a>
 									</span>
 								</li>
 							{% endif %}

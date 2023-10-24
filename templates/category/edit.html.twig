@@ -14,7 +14,7 @@
 	<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 		{{ form_errors(form) }}
 		<div class="sm:mx-auto sm:w-full sm:max-w-sm">
-			<h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Modifier
+			<h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Modifier la catégorie
 				{{category.name}}</h2>
 		</div>
 
@@ -41,7 +41,7 @@
                     {{ include('category/_delete_form.html.twig') }}
 				</div>
 			<div class="mt-4">
-				<a href="{{ path('app_category_index') }}" class="underline ">Retour aux catégories</a>
+				<a href="{{ path('app_category_index') }}" class="underline hover:text-teal-800 ">Retour aux catégories</a>
 			</div>
 
 		</div>
