@@ -53,7 +53,8 @@ class EventType extends AbstractType
                 'label'=> 'Description :',
                 'required'=>false,
                 'attr' => [
-            'placeholder' => 'Décrivez l\'événement'
+            'placeholder' => 'Décrivez l\'événement',
+            
                 ]   
             ])
             ->add('websiteLink',TextType::class,[
@@ -83,11 +84,12 @@ class EventType extends AbstractType
                 'label' => 'Artistes : ',
                 'placeholder' => 'Sélectionnez les artistes', 
                 'multiple' => true, // Enable multiple selections
+                'expanded' => true,//checkbox style
                 'required' => false,
                 'by_reference' => false, // Important for changes to be applied
             ])
             ->add('favoriteImage', FileType::class, [
-                'label' => 'Image favorite: ',
+                'label' => 'Image mise en avant: ',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -103,7 +105,7 @@ class EventType extends AbstractType
                 ],
             ])
             ->add('images', FileType::class, [
-                'label' => 'Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Modifier" ',
+                'label' => 'Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Valider" ',
     
                 // unmapped means that this field is not associated to any entity property
                 //So we can handle images ourself in ArtistController

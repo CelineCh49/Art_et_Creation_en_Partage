@@ -1,31 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier un événement{% endblock %}
+{% block title %}Modifier un événement
+{% endblock %}
 
 {% block body %}
-    <h1>Modifier un événement</h1>
-
-    {{ include('event/_form.html.twig', {'button_label': 'Modifier'}) }}
-
-		<div>Photo mise en avant:
-		<img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite " height="150">
+	<div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
+		<div class="flex items-center justify-between pb-10">
+			<h2 class="text-2xl font-bold tracking-tight text-gray-900 ">
+				Modifier un événement</h2>
 		</div>
-
-    	<div>Toutes les photos de l'événement:</div>
-
-		{% for image in event.eventImages %}
-			<div>
-				<img src="{{asset('assets/uploads/event_img/'~ image.fileName)}}" alt="Image {{image.fileName}}" height="150">
-				{{ include('event/_delete_image_form.html.twig') }}
-				{# <a href="{{path('app_artist_delete_image', {'id':image.id}) }}"
-				            data-delete data-token = "{{ csrf_token('delete'~ image.id) }}">Supprimer</a> #}
+		<div>
+			{{ include('event/_form.html.twig') }}
+		</div>
+		<div class="pt-10 pb-5">
+			<h3 class="text-lg font-bold tracking-tight text-gray-900 ">Photo mise en avant:</h3>
+			<img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" class=" h-96 ">
+		</div>
+		<div class="py-5">
+			<h3 class="text-lg font-bold tracking-tight text-gray-900 ">Toutes les photos de l'événement:</h3>
+			<div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-">
+				{% for image in event.eventImages %}
+					<div>
+						<img src="{{asset('assets/uploads/event_img/'~ image.fileName)}}" alt="Image {{image.fileName}}" class="max-h-96 " >
+						{{ include('event/_delete_image_form.html.twig') }}
+						{# <a href="{{path('app_artist_delete_image', {'id':image.id}) }}"
+															            data-delete data-token = "{{ csrf_token('delete'~ image.id) }}">Supprimer</a> #}
+					</div>
+				{% endfor %}
 			</div>
-		{% endfor %}
-
-		<a href="{{ path('app_event_show', {'id': event.id}) }}">Retour sur l'événement</a>
-
-
-    <a href="{{ path('app_event_index') }}">Voir tous les événements</a>
-
-    {{ include('event/_delete_form.html.twig') }}
+		</div>
+		<div>
+			{{ include('event/_delete_form.html.twig') }}
+		</div>
+		<div>
+			<a href="{{ path('app_event_show', {'id': event.id}) }}" class="underline hover:text-teal-800">Retour sur l'événement</a>
+		</div>
+		{# <div>
+			<a href="{{ path('app_event_index') }}">Voir tous les événements</a>
+		</div> #}
+		
+	</div>
 {% endblock %}
