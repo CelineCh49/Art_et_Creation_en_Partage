@@ -113,10 +113,15 @@
 		</div>
 
 		<!-- Image gallery -->
-		<div class="mx-auto pt-10 pb-16 mt-2 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 gap-y-10 ">
+		<div class="image-container " >
 			{% for image in artist.artistImages %}
-				<div class="aspect-h-4 aspect-w-3  overflow-hidden rounded-lg lg:block">
+				<div class="image">
 					<img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="{{image.fileName}}" class="h-full w-full object-cover object-center">
+				</div>
+				<div class="popup-image">
+					<span>&times;</span>
+					<img src="{{asset('assets/uploads/event_img/'~ image.fileName)}}" alt="{{image.fileName}}" class="h-full w-full object-cover object-center">
+
 				</div>
 			{% endfor %}
 		</div>
