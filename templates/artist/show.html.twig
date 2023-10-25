@@ -15,7 +15,7 @@
 		</div>
 
 		<!-- Artist info -->
-		<div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+		<div class="mx-auto max-w-2xl px-4 pb-10 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-5 lg:pt-16">
 
 			<div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
 				<h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{artist.artistName}}</h1>
@@ -113,7 +113,7 @@
 		</div>
 
 		<!-- Image gallery -->
-		<div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 ">
+		<div class="mx-auto pt-10 pb-16 mt-2 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 gap-y-10 ">
 			{% for image in artist.artistImages %}
 				<div class="aspect-h-4 aspect-w-3  overflow-hidden rounded-lg lg:block">
 					<img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="{{image.fileName}}" class="h-full w-full object-cover object-center">

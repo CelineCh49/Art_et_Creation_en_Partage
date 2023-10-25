@@ -23,8 +23,6 @@
 					<div>
 						<img src="{{asset('assets/uploads/event_img/'~ image.fileName)}}" alt="Image {{image.fileName}}" class="max-h-96 " >
 						{{ include('event/_delete_image_form.html.twig') }}
-						{# <a href="{{path('app_artist_delete_image', {'id':image.id}) }}"
-															            data-delete data-token = "{{ csrf_token('delete'~ image.id) }}">Supprimer</a> #}
 					</div>
 				{% endfor %}
 			</div>
@@ -35,9 +33,5 @@
 		<div>
 			<a href="{{ path('app_event_show', {'id': event.id}) }}" class="underline hover:text-teal-800">Retour sur l'événement</a>
 		</div>
-		{# <div>
-			<a href="{{ path('app_event_index') }}">Voir tous les événements</a>
-		</div> #}
-		
 	</div>
 {% endblock %}

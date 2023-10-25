@@ -4,14 +4,39 @@
 {% endblock %}
 
 {% block body %}
-	<div class="flex flex-col justify-center px-6 py-12 lg:px-12">
-		<div class="sm:mx-auto sm:w-full sm:max-w-sm">
-			<h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Modifier une fiche Artiste</h2>
+	<div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
+		<div class="flex items-center justify-between pb-10">
+			<h2 class="text-2xl font-bold tracking-tight text-gray-900 ">
+				Modifier une fiche artiste</h2>
 		</div>
 		<div>
 			{{ include('artist/_form.html.twig') }}
 		</div>
 		<div>
+			<a href="{{ path('app_artist_show', {'id': artist.id}) }}" class="underline hover:text-teal-800">Retour sur ma fiche</a>
+		</div>
+		<div class="pt-10 pb-5">
+			<h3 class="text-lg font-bold tracking-tight text-gray-900 ">Photo mise en avant:</h3>
+			<img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite" class=" h-96 ">
+		</div>
+		<div class="py-5">
+			<h3 class="text-lg font-bold tracking-tight text-gray-900 ">Mes photos:</h3>
+			<div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-">
+				{% for image in artist.artistImages %}
+					<div>
+						<img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="Image {{image.fileName}}" class="max-h-96 ">
+						{{ include('artist/_delete_image_form.html.twig') }}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div>
+			{{ include('artist/_delete_form.html.twig') }}
+		</div>
+	</div>
+
+
+	{# <div>
 			<a href="{{ path('app_artist_show', {'id': artist.id}) }}" class="underline hover:text-teal-800">Retour sur ma fiche</a>
 			{{ include('artist/_delete_form.html.twig') }}
 		</div>
@@ -23,7 +48,7 @@
 		</div>
 		<div class="flex flex-col">
 			<h3 class="mt-1 text-lg font-bold text-gray-900">Mes photos:</h3>
-
+	
 			<div class="grid grid-cols-1 gap-x-6 gap-y-10 lg:grid-cols-3 ">
 				{% for image in artist.artistImages %}
 					<div class="flex flex-col">
@@ -32,152 +57,6 @@
 					</div>
 				{% endfor %}
 			</div>
-
-		</div>
-	</div>
-
-
+	
+		</div> #}
 {% endblock %}
-{# <h1>Modifier une fiche Artiste</h1> #}
-
-{# {{ include('artist/_form.html.twig', {'button_label': 'Modifier'}) }}
-	
-			<div>Photo mise en avant:
-			<img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite " height="150">
-			</div>
-	
-			<div>Toutes mes photos:</div>
-	
-			{% for image in artist.artistImages %}
-				<div>
-					<img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="Image {{image.fileName}}" height="150">
-					{{ include('artist/_delete_image_form.html.twig') }}
-					{# <a href="{{path('app_artist_delete_image', {'id':image.id}) }}"
-					            data-delete data-token = "{{ csrf_token('delete'~ image.id) }}">Supprimer</a> #}
-{# </div> #}
-{# {% endfor %}
-	
-			<a href="{{ path('app_artist_show', {'id': artist.id}) }}">Retour sur ma fiche</a>
-	
-	
-			<a href="{{ path('app_artist_index') }}">Voir tous les artistes</a>
-	
-			{{ include('artist/_delete_form.html.twig') }} #}
-
-
-{# <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8"> {{ form_errors(form) }}
-		<div class="sm:mx-auto sm:w-full sm:max-w-sm">
-			<h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Modifier une fiche Artiste</h2>
-		</div>
-
-		<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-			<form class="space-y-6" action="#" method="POST">
-
-				{{ form_start(form) }}
-
-				<div>
-					<label for="{{ form.artistName.vars.id }}" class="block text-sm font-medium leading-6 text-gray-900">Nom d'artiste</label>
-					<div class="mt-2">
-						{{ form_row(form.artistName, {'attr': {'class': 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'}, 'label': false}) }}
-					</div>
-				</div>
-				<div>
-					<label for="{{ form.description.vars.id }}" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
-					<div class="mt-2">
-						{{ form_row(form.description, {'attr': {'class': 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'}, 'label': false}) }}
-					</div>
-				</div>
-				<div>
-					<label for="{{ form.email.vars.id }}" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
-					<div class="mt-2">
-						{{ form_row(form.email, {'attr': {'class': 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'}, 'label': false}) }}
-					</div>
-				</div>
-				<div>
-					<label for="{{ form.telephone.vars.id }}" class="block text-sm font-medium leading-6 text-gray-900">Téléphone</label>
-					<div class="mt-2">
-						{{ form_row(form.telephone, {'attr': {'class': 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'}, 'label': false}) }}
-					</div>
-				</div>
-
-				<div>
-					<label for="{{ form.websiteLink.vars.id }}" class="block text-sm font-medium leading-6 text-gray-900">Lien de votre site internet :</label>
-					<div class="mt-2">
-						{{ form_row(form.websiteLink, {'attr': {'class': 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'}, 'label': false}) }}
-					</div>
-				</div>
-				<div>
-					<label for="{{ form.facebookLink.vars.id }}" class="block text-sm font-medium leading-6 text-gray-900">Lien de votre site Facebook :</label>
-					<div class="mt-2">
-						{{ form_row(form.facebookLink, {'attr': {'class': 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'}, 'label': false}) }}
-					</div>
-				</div>
-				<div>
-					<label for="{{ form.instagramLink.vars.id }}" class="block text-sm font-medium leading-6 text-gray-900">Lien de votre site Instagram :</label>
-					<div class="mt-2">
-						{{ form_row(form.instagramLink, {'attr': {'class': 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'}, 'label': false}) }}
-					</div>
-				</div>
-				<div class="mt-10 space-y-10">
-					<fieldset>
-						<legend class="text-sm font-semibold leading-6 text-gray-900">Catégories:</legend>
-						<div class="mt-2 space-y-2">
-							{{ form_row(form.categories, {'attr': {'class': 'block w-full rounded-md border-0 mr-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'}, 'label': false}) }}
-						</div>
-					</fieldset>
-				</div>
-				<div class="mt-10 space-y-10">
-					<fieldset>
-						<legend class="text-sm font-semibold leading-6 text-gray-900">Evénements participés:</legend>
-						<div class="mt-2 space-y-2">
-							{{ form_row(form.events, {'attr': {'class': 'block w-full rounded-md border-0 mr-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'}, 'label': false}) }}
-						</div>
-					</fieldset>
-				</div>
-				<div>Photo mise en avant:
-					<img src="{{asset('assets/uploads/artist_img/'~ artist.favoriteImage)}}" alt="Image favorite " height="150">
-				</div>
-				<div>
-					<label for="{{ form.favoriteImage.vars.id }}" class="block text-sm font-medium leading-6 text-gray-900">Modifier l'image du profil de l'artiste :</label>
-					<div class="mt-2">
-						{{ form_row(form.favoriteImage, {'attr': {'class': 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'}, 'label': false}) }}
-					</div>
-				</div>
-
-				<div>Toutes mes photos:</div>
-
-				{% for image in artist.artistImages %}
-					<div>
-						<img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="Image {{image.fileName}}" height="150">
-						{{ include('artist/_delete_image_form.html.twig') }}
-						
-					</div>
-				{% endfor %}
-
-				<div>
-					<label for="{{ form.images.vars.id }}" class="block text-sm font-medium leading-6 text-gray-900">Ajouter des photos :</label>
-					<div class="mt-2">
-						{{ form_row(form.images, {'attr': {'class': 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'}, 'label': false}) }}
-					</div>
-				</div>
-
-				
-				<div>
-					<button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Modifier</button>
-				</div>
-				{{ form_end(form) }}
-			</form>
-		</div>
-	</div> #}
-{# <a href="{{ path('app_artist_show', {'id': artist.id}) }}">Retour sur ma fiche</a>
-	{{ include('artist/_delete_form.html.twig') }}
-{% endblock %} #}
-
-{# {% block javascripts %}
-	    <script src="{{asset('assets/js/images.js') }}"></script>
-	{% endblock %} #}
-
-{# <a href="{{path('app_artist_delete_image', {'id':image.id}) }}"
-										            data-delete data-token = "{{ csrf_token('delete'~ image.id) }}">Supprimer</a>  #}
-
-{# <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"> #}
