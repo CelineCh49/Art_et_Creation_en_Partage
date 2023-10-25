@@ -76,7 +76,7 @@
 					</div>
 				</div>
 
-				
+
 			</div>
 		</div>
 		<!--buttons-->
@@ -92,17 +92,23 @@
 			{% endif %}
 		</div>
 		<!-- Image gallery -->
-		<div class="mx-auto pt-10 pb-16 mt-2 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 gap-y-10 ">
+		<div class="image-container " >
 			{% for image in event.eventImages %}
-				<div class="aspect-h-4 aspect-w-3 max-h-72 overflow-hidden rounded-lg lg:block">
+				<div class="image">
 					<img src="{{asset('assets/uploads/event_img/'~ image.fileName)}}" alt="{{image.fileName}}" class="h-full w-full object-cover object-center">
+				</div>
+				<div class="popup-image">
+					<span>&times;</span>
+					<img src="{{asset('assets/uploads/event_img/'~ image.fileName)}}" alt="{{image.fileName}}" class="h-full w-full object-cover object-center">
+
 				</div>
 			{% endfor %}
 		</div>
 
-			<section>
+		<section>
 			<!--Les artistes-->
-				<div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8"> <div class="flex items-center justify-between pb-10">
+			<div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
+				<div class="flex items-center justify-between pb-10">
 					<h2 class="text-2xl font-bold tracking-tight text-gray-900 ">
 						Les artistes</h2>
 
@@ -113,6 +119,8 @@
 						{% include 'artist/_card.html.twig'%}
 					{% endfor %}
 				</div>
+
+
 			</div>
 		</section>
 

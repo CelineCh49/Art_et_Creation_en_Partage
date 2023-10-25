@@ -13,3 +13,73 @@ body {
    width: 100%;
 }
 
+.image-container{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+justify-content:center;
+padding:80px;
+
+}
+
+.image-container .image{
+display:flex;
+align-items:center;
+justify-content:center;
+height:250px;
+width:350px; 
+/* border:5px solid #ffff; */
+border-radius:10px;
+box-shadow: 0 5px 10px rgba(0,0,0,.2);
+overflow : hidden;
+cursor:pointer;
+}
+
+.image-container .image img{
+max-height:100%;
+width:100%;
+object-fit: cover;
+transition: .2s linear;
+
+}
+
+.image-container .image:hover img{
+transform: scale(1.1);
+}
+
+.image-container .popup-image{
+position:fixed;
+top:0; left:0;
+background:rgba(0,0,0,.9);    
+height:100%;
+width:100%;
+z-index:100;
+display:none;
+}
+.image-container .popup-image span{
+position:absolute;
+top:0; right:10px;
+font-size:60px;
+font-weight:bolder;
+color: #fff;
+cursor:pointer;
+z-index:100;
+}
+.image-container .popup-image img{
+position:absolute;
+top:50%; left:50%;
+transform: translate(-50%, -50%);
+border:5px solid #fff;
+border-radius: 5px;
+height:100%;
+width:auto;
+object-fit: cover;
+display: block; 
+margin: 0 auto;
+}
+
+@media (max-width:768px) {
+    .image-container .popup-image img{
+        width:95%;
+    }
+}
