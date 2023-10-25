@@ -17,7 +17,7 @@
 		{% endblock %}
 
 	</head>
-	<body class="bg-gray-40">
+	<body class="bg-gray-40 min-h-screen flex flex-col">
 
 		<!-- Navigation -->
 		{# {% include "inc/nav.html.twig" %} #}
@@ -47,10 +47,15 @@
 		{% endfor %}
 
 
+<div class="flex-1">
 		{% block body %}{% endblock %}
-
+ </div>
 
 		<!-- Footer -->
+		<div>
 		{% include "inc/footer.html.twig" %}
+		</div>
+
+		
 	</body>
 </html>
