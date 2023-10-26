@@ -16,7 +16,7 @@
 					<a href="{{path ('app_event_index')}}" class="underline hover:text-teal-800" title='Voir tous les événements'>Voir tout</a>
 				</div>
 
-				<div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-12 xl:gap-y-12">
+				<div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8 xl:gap-y-12">
 					{% for event in events %}
 						{% include 'event/_card.html.twig'%}
 					{% endfor %}

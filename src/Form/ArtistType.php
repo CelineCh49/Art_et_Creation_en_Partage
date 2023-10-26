@@ -92,14 +92,14 @@ class ArtistType extends AbstractType
             ->add('events', EntityType::class,[
                 'class' => Event::class,
                 'choice_label' => 'name', 
-                'label' => 'Evénement participé',
+                'label' => 'Evénement auquel vous avez participé: ',
                 'placeholder' => 'Sélectionnez un ou plusieurs événements', 
                 'expanded' => true,//checkbox style
                 'multiple' => true, // Enable multiple selections
                 'required' => false, 
             ])
             ->add('favoriteImage', FileType::class, [
-                'label' => 'Image favorite: Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Valider" ',
+                'label' => 'Image du profil de l\'artiste: Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Valider" ',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
