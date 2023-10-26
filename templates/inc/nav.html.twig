@@ -23,9 +23,14 @@
 		<div class="flex items-center lg:flex-row flex-col">
 			
 				{% if app.user %}
-					<div>
+					<div class="flex flex-row">
 						{% if  is_granted("ROLE_ADMIN") %}
-							<a href="{{ path('app_category_index')}}" class="hover:bg-teal-200 hover:text-black rounded-md px-4 py-2">Catégories</a>
+						<div >
+						<a href="{{ path('app_category_index')}}" class="hover:bg-teal-200 hover:text-black rounded-md px-4 py-2">Catégories</a>
+						</div>
+							<div>
+							<a href="{{ path('app_register')}}" class="hover:bg-teal-200 hover:text-black rounded-md px-3 py-2">Inscription</a>
+						</div>
 						{% endif %}
 					</div>
 					<div>
@@ -48,9 +53,7 @@
 
 				{% else %}
 					<div class="flex items-center lg:flex-row sm:flex-col flex-col">
-						<div>
-							<a href="{{ path('app_register')}}" class="hover:bg-teal-200 hover:text-black rounded-md px-3 py-2">S'inscrire</a>
-						</div>
+						
 						<div>
 							<a href="{{ path('app_login')}}" class="hover:bg-teal-200 hover:text-black rounded-md px-3 py-2">Se connecter</a>
 						</div>
