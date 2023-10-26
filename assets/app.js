@@ -8,17 +8,7 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 
-// document.querySelectorAll('.image-container img').forEach(image=>{
-// 	image.onclick = ()=>{
-// 		document.querySelector('popup-image').style.display = 'block';
-// 		document.querySelector('popup-image img').src = image.getAttribute('src');
-// 	}
-	
-// });
-
-// document.querySelector('popup-image span').onclick = ()=>{
-// 	document.querySelector('popup-image').style.display = 'none';
-// }
+/**Lightbox */
 // Sélectionnez toutes les images dans la classe '.image-container'
 var images = document.querySelectorAll('.image-container img');
 
@@ -44,3 +34,8 @@ closeButton.addEventListener('click', function() {
   // Masque la boîte modale
   modal.style.display = 'none';
 });
+
+/**burger menu */
+icons.addEventListener('click', ()=>{
+  nav.classList.toggle("navactive");
+})
