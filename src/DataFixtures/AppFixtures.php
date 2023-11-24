@@ -46,7 +46,7 @@ class AppFixtures extends Fixture
         dump('Evenement créé : ' . $event1->getName());
 
         //Category
-        $categoryNames = ['PEINTURE', 'SCULPTURE', 'PLASTICIEN.NE', 'POESIE','PHOTOGRAPHIE','MUSIQUE', 'AUTRE'];
+        $categoryNames = ['PEINTURE', 'SCULPTURE', 'PLASTICIEN.NE', 'POESIE','PHOTOGRAPHIE','MUSIQUE'];
         foreach ($categoryNames as $categoryName) {
             $category = new Category();
             $category->setName($categoryName);
@@ -116,6 +116,8 @@ class AppFixtures extends Fixture
                 $artist->setFavoriteImage($artistData['favoriteImage']);
                 $artist->addEvent($event1);
 
+               
+
                 // Associate category to artist
                 $categories = $artistData['categories'];
                 foreach ($categories as $categoryName) {
@@ -124,14 +126,14 @@ class AppFixtures extends Fixture
                         $artist->addCategory($category);
                     }
                 }
-
-
                 $artist->setUser($admin);
                 $admin->setArtist($artist);
+                dump('Artist créé : ' . $artist->getArtistName());
+                
             }
                 $manager->persist($admin);
                 dump('Admin créé : ' . $admin->getLastName());
-                dump('Artist créé : ' . $artist->getArtistName());
+                
             
         }
         $manager->flush();

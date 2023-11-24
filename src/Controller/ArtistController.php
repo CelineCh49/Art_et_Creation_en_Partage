@@ -42,11 +42,9 @@ class ArtistController extends AbstractController
         $user = $this->getUser();
 
         if ($user->getArtist() !== null) {
-            // L'utilisateur a déjà un artiste, donc vous pouvez renvoyer une erreur ou rediriger
-            throw new AccessDeniedException('Vous avez déjà créé une fiche artiste. Vous ne pouvez pas en posséder plusieurs.');
+            throw new AccessDeniedException('Vous avez déjà créé une fiche artiste.
+             Vous ne pouvez pas en posséder plusieurs.');
         }
-        //si $user contains artist -->message refus: un utkilisateur ne peut créer qu'une fiche artiste-->renvoi accueil
-        //sinon
         $artist = new Artist();
         $form = $this->createForm(ArtistType::class, $artist);
         $form->handleRequest($request);
@@ -56,30 +54,11 @@ class ArtistController extends AbstractController
             $errors = $this->checkArtist($artist);
             if (count($errors) === 0) {
 
-                //ArtisteName to uppercase
+                //ArtisteName to ucfirst
                 $name = $form->get('artistName')->getData(); 
                 $upperName = ucfirst($name);
                 $artist->setArtistName($upperName);
                 $artist->setUser($user);
-
-                // //Get images uploaded
-                // $images=$form->get('images')->getData();
-
-                // //Loop images
-                //     //Generate a new unique filename
-                //     foreach($images as $image){
-                //     $file = md5(uniqid()).'.'.$image->guessExtension();
-                //     //copy the file in uploads directory
-                //     $image->move(
-                //         $this->getParameter('artist_images_directory'),
-                //         $file
-                //     );
-                //     //Stock image in database
-                //     $artistImage = new ArtistImage();
-                //     $artistImage->setFileName($file);
-                //     $artist->addArtistImage($artistImage);
-
-                //     }
 
                 //Favorite Image
                 //Get images uploaded

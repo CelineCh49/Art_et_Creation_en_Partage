@@ -1,6 +1,6 @@
 
 <footer class="flex flex-col bg-gray-800 mt-[50px] pb-5">
-	<nav >
+	<div >
 		<div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
 			<div class="relative flex h-16 items-center justify-between">
 				
@@ -17,24 +17,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-					{# {% if app.user %}
-						<a href="{{ path('my_profile')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Mon profil</a>
-						{% if app.user.artist %}
-							<a href="{{ path('app_artist_edit', {'id': app.user.artist.id} ) }}" class=" text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Ma fiche artiste</a> 
-						{% else %}
-							<a href="{{ path('app_artist_new')}}" class=" text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Créer une fiche artiste</a> 
-						{% endif %}
-						<a href="{{ path('app_logout')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Déconnexion</a>
-						<span class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{ app.user.userIdentifier }}</span>
-					{% else %}
-								<a href="{{ path('app_login')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Se connecter</a>
-					{% endif %} #}
-					<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Mentions légales et politique de confidentialité</a>
+				<div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 ">
+					<a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium lg:block ">Mentions légales et politique de confidentialité</a>
 				</div>
 			</div>
 		</div>
-	</nav>
+	</div>
     <div class="flex items-center justify-center">
         <p class="text-sm text-gray-300">2023 | Art et création en partage</p>
     </div>

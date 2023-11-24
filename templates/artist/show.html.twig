@@ -6,16 +6,14 @@
 
 
 {% block body %}
-	
-
-
 	<div class="pt-6 px-6">
 		<div class="flex justify-end pr-10">
 			<a href="{{ path('app_artist_index') }}" class="underline hover:text-teal-800">Voir tous les artistes</a>
 		</div>
 
 		<!-- Artist info -->
-		<div class="mx-auto max-w-2xl px-4 pb-10 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-5 lg:pt-16">
+		<div class="mx-auto max-w-2xl px-4 pb-10 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3
+		 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-5 lg:pt-16">
 
 			<div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
 				<h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{artist.artistName}}</h1>
@@ -116,11 +114,13 @@
 		<div class="image-container " >
 			{% for image in artist.artistImages %}
 				<div class="image">
-					<img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="{{image.fileName}}" class="h-full w-full object-cover object-center">
+					<img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="{{image.fileName}}" 
+					class="h-full w-full object-cover object-center">
 				</div>
 				<div class="popup-image">
 					<span>&times;</span>
-					<img src="{{asset('assets/uploads/event_img/'~ image.fileName)}}" alt="{{image.fileName}}" class="h-full w-full object-cover object-center">
+					<img src="{{asset('assets/uploads/artist_img/'~ image.fileName)}}" alt="{{image.fileName}}" 
+					class="h-full w-full object-cover object-center">
 
 				</div>
 			{% endfor %}
@@ -130,10 +130,4 @@
 {% endblock %}
 
 
-{# <th>Evénements participés</th>
-			<td>
-				{% for event in artist.events %}
-					<a href="{{ path('app_event_show', {'id': event.id}) }}">
-						<img src="{{asset('assets/uploads/event_img/'~ event.favoriteImage)}}" alt="Image favorite" height="150">{{ event.name }}</a>
-				{% endfor %}
-			</td> #}
+

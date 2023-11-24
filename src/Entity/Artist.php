@@ -21,18 +21,10 @@ class Artist
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Le nom d\'artiste est obligatoire')]
-    #[Assert\Length(min: 1, max: 255, minMessage: 'Le nom d\'artiste doit faire au moins {{ limit }} caractères', maxMessage: 'Le nom d\'artiste doit faire au plus {{ limit }} caractères')]
+    #[Assert\Length(min: 1, max: 255,
+     minMessage: 'Le nom d\'artiste doit faire au moins {{ limit }} caractères',
+     maxMessage: 'Le nom d\'artiste doit faire au plus {{ limit }} caractères')]
     private ?string $artistName = null;
-
-    // #[ORM\Column(length: 255)]
-    // #[Assert\NotBlank(message: 'Le prénom est obligatoire')]
-    // #[Assert\Length(min: 2, max: 255, minMessage: 'Le prénom  doit faire au moins {{ limit }} caractères', maxMessage: 'Le prénom doit faire au plus {{ limit }} caractères')]
-    // private ?string $firstName = null;
-
-    // #[ORM\Column(length: 255)]
-    // #[Assert\NotBlank(message: 'Le nom est obligatoire')]
-    // #[Assert\Length(min: 2, max: 255, minMessage: 'Le nom  doit faire au moins {{ limit }} caractères', maxMessage: 'Le nom doit faire au plus {{ limit }} caractères')]
-    // private ?string $lastName = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(message: 'Une description est obligatoire')]
@@ -46,7 +38,7 @@ class Artist
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Regex(pattern:  '/^0[1-9]([-. ]?[0-9]{2}){4}$/',
-        message: 'Le numéro de téléphone doit être au format français valide, par exemple, 01-23-45-67-89.',)] // for french format //TODO: changer pour  le regex pour l'international
+        message: 'Le numéro de téléphone doit être au format français valide, par exemple, 01-23-45-67-89.',)]             // for french format //TODO: changer pour  le regex pour l'international
     private ?string $telephone = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -61,7 +53,7 @@ class Artist
     #[Assert\Url(message : "Veuillez saisir une URL valide commençant par http:// ou https://" )]
     private ?string $instagramLink = null;
 
-    #[ORM\OneToOne(inversedBy: 'artist', cascade: ['persist'])] //TODO: vérifier la cascade
+    #[ORM\OneToOne(inversedBy: 'artist', cascade: ['persist'])] 
     private ?User $user = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'artists')]
@@ -101,29 +93,7 @@ class Artist
         return $this;
     }
 
-    // public function getFirstName(): ?string
-    // {
-    //     return $this->firstName;
-    // }
-
-    // public function setFirstName(string $firstName): static
-    // {
-    //     $this->firstName = $firstName;
-
-    //     return $this;
-    // }
-
-    // public function getLastName(): ?string
-    // {
-    //     return $this->lastName;
-    // }
-
-    // public function setLastName(string $lastName): static
-    // {
-    //     $this->lastName = $lastName;
-
-    //     return $this;
-    // }
+   
 
     public function getDescription(): ?string
     {

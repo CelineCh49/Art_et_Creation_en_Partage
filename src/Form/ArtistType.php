@@ -23,22 +23,13 @@ class ArtistType extends AbstractType
         $builder
         ->add('artistName',TextType::class,[
             'label'=> 'Nom d\'artiste :',
-            'required' => true,
-            
-        ])
-        // ->add('firstName',TextType::class,[
-        //     'label'=> 'Prénom :',
-        //     'required' => true,
-        // ])
-        // ->add('lastName',TextType::class,[
-        //     'label'=> 'Nom :',
-        //     'required' => true,
-        // ])
+            'required' => true,           
+        ])        
         ->add('description', TextareaType::class,[
             'label'=> 'Description :',
             'required' => true,
             'attr' => [
-        'placeholder' => 'Décrivez votre style, votre concept, ce qui définit votre art...'
+            'placeholder' => 'Décrivez votre style, votre concept, ce qui définit votre art...'
             ]   
         ])
         ->add('email',EmailType::class,[
@@ -76,7 +67,7 @@ class ArtistType extends AbstractType
             'placeholder' => 'https://www.instagram.com/exemple/'
             ]   
         ])
-           // ->add('user')
+           
            ->add('categories', EntityType::class,[
                 'class' => Category::class,
                 'choice_label' => 'name', 
@@ -84,22 +75,11 @@ class ArtistType extends AbstractType
                 'placeholder' => 'Sélectionnez une catégorie', 
                 'required' => false, 
                 'expanded' => true,//checkbox style
-                'multiple' => true, // Enable multiple selections
-                
-                
-            ])
-            
-            // ->add('events', EntityType::class,[
-            //     'class' => Event::class,
-            //     'choice_label' => 'name', 
-            //     'label' => 'Evénement auquel vous avez participé: ',
-            //     'placeholder' => 'Sélectionnez un ou plusieurs événements', 
-            //     'expanded' => true,//checkbox style
-            //     'multiple' => true, // Enable multiple selections
-            //     'required' => false, 
-            // ])
+                'multiple' => true, // Enable multiple selections   
+            ])         
             ->add('favoriteImage', FileType::class, [
-                'label' => 'Image du profil de l\'artiste: Télécharger une image (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Valider" ',
+                'label' => 'Image du profil de l\'artiste: Télécharger une image 
+                (jpeg, png, webp - taille max: 1024K) puis cliquer sur "Valider" ',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [

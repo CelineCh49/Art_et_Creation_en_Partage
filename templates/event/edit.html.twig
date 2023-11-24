@@ -8,6 +8,9 @@
 		<div class="flex items-center justify-between pb-10">
 			<h2 class="text-2xl font-bold tracking-tight text-gray-900 ">
 				Modifier un événement</h2>
+				<div>
+			<a href="{{ path('app_event_show', {'id': event.id}) }}" class="underline hover:text-teal-800">Retour sur l'événement</a>
+		</div>
 		</div>
 		<div>
 			{{ include('event/_form.html.twig') }}

@@ -1,26 +1,10 @@
-<nav id="nav"class="navactive bg-black flex justify-between items-center p-10 text-gray-100 font-bold" >
-<h3 >Art et Création en Partage</h3>
-	<ul class="flex justify-between w-3/5">
-		<li>
-		<a href="" class="hover:bg-teal-200 hover:text-black rounded-md">Accueil</a>
-		</li>
-		<li>
-		<a href="" class="hover:bg-teal-200 hover:text-black rounded-md">A propos</a>
-		</li>
-		<li>
-		<a href="" class="hover:bg-teal-200 hover:text-black rounded-md">Evénements</a>
-		</li>
-		<li>
-		<a href="" class="hover:bg-teal-200 hover:text-black rounded-md">Artistes</a>
-		</li>
-		<li>
-		<a href="" class="hover:bg-teal-200 hover:text-black rounded-md">Contact</a>
-		</li>
-	</ul>
-<div id="icons"></div>
-</nav>
+<nav>
 
-			{# <div>
+<!--Onglets fixes-->
+	
+		<div class="">
+
+			<div>
 				<a href="{{path('app_main')}}" class=" hover:bg-teal-200 hover:text-black rounded-md px-4 py-2 ">Accueil</a>
 			</div>
 			<div>
@@ -35,25 +19,30 @@
 			<div>
 				<a href="{{path('app_contact')}}" class="hover:bg-teal-200 hover:text-black rounded-md px-4 py-2">Contact</a>
 			</div>
-
 		</div>
-
-		<div class="flex items-center lg:flex-row flex-col">
+<!--Onglets variables-->
+		<div class="">
 			
 				{% if app.user %}
-					<div>
+					<div class="">
 						{% if  is_granted("ROLE_ADMIN") %}
-							<a href="{{ path('app_category_index')}}" class="hover:bg-teal-200 hover:text-black rounded-md px-4 py-2">Catégories</a>
+						<div >
+						<a href="{{ path('app_category_index')}}" class="hover:bg-teal-200 hover:text-black rounded-md px-4 py-2">Catégories</a>
+						</div>
+							<div>
+							<a href="{{ path('app_register')}}" class="hover:bg-teal-200 hover:text-black rounded-md px-3 py-2">Inscription</a>
+						</div>
 						{% endif %}
 					</div>
 					<div>
 						{% if app.user.artist %}
-							<a href="{{ path('app_artist_show', {'id': app.user.artist.id} ) }}" class=" hover:bg-teal-200 hover:text-black rounded-md px-4 py-2">Ma fiche artiste</a>
+							<a href="{{ path('app_artist_show', {'id': app.user.artist.id} ) }}" 
+							class=" hover:bg-teal-200 hover:text-black rounded-md px-4 py-2">Ma fiche artiste</a>
 						{% else %}
-							<a href="{{ path('app_artist_new')}}" class=" hover:bg-teal-200 hover:text-black rounded-md px-4 py-2">Créer une fiche artiste</a>
+							<a href="{{ path('app_artist_new')}}" 
+							class=" hover:bg-teal-200 hover:text-black rounded-md px-4 py-2">Créer une fiche artiste</a>
 						{% endif %}
 					</div>
-
 					<div>
 						<a href="{{ path('my_profile')}}" class="hover:bg-teal-200 hover:text-black rounded-md px-4 py-2">Mon profil</a>
 					</div>
@@ -63,17 +52,15 @@
 					<div class="text-gray-300 px-4 py-2 text-sm font-medium">
 						{{ app.user.userIdentifier }}
 					</div>
-
 				{% else %}
-					<div class="flex items-center lg:flex-row sm:flex-col flex-col">
-						<div>
-							<a href="{{ path('app_register')}}" class="hover:bg-teal-200 hover:text-black rounded-md px-3 py-2">S'inscrire</a>
-						</div>
+					<div class="">
+						
 						<div>
 							<a href="{{ path('app_login')}}" class="hover:bg-teal-200 hover:text-black rounded-md px-3 py-2">Se connecter</a>
 						</div>
 					</div>
 				{% endif %}
 			
-		</div> #}
-	
+		
+	</nav>
+
