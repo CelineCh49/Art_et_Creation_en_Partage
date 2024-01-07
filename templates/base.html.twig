@@ -20,17 +20,8 @@
 	<body class="bg-gray-40 min-h-screen flex flex-col">
 
 		<!-- Navigation -->
-		{# {% include "inc/nav.html.twig" %} #}
 		{% include "inc/header.html.twig" %}
 		<!-- Main Content -->
-
-		{# {% for key, messages in app.flashes %}
-						{% for message in messages %}
-							<div class="alert alert-{{ key }}">
-								{{ message }}
-							</div>
-						{% endfor %}
-					{% endfor %} #}
 
 			{% for success, messages in app.flashes %}
 				{% for message in messages %}

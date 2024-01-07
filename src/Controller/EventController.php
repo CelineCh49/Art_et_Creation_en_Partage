@@ -81,13 +81,6 @@ class EventController extends AbstractController
                     $event->addEventImage($eventImage);
                 }
 
-                // $formArtists = $form->get('artists')->getData();
-                // foreach ($formArtists as $formArtist) {
-                //     $formArtistName = $formArtist->getArtistName();
-                //     $artist = $artistRepository->findOneByArtistName($formArtistName);
-                //     $artist->addEvent($event);
-                //     $entityManager->persist($artist);
-                // }
                 $entityManager->persist($event);
                 $entityManager->flush();
                 $this->addFlash('success', 'L\'événement a été ajouté avec succès.');

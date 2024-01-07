@@ -23,31 +23,10 @@ closeButton.addEventListener('click', function() {
 });
 
 
+/**Burger */
+var navig = document.getElementById('navig');
+var burgerButton = document.getElementById('burgerButton');
 
-
-
-/**burger menu */
-// icons.addEventListener('click', ()=>{
-//   nav.classList.toggle("navactive");
-// })
-
-// var icons = document.getElementById("icons");
-// var nav = document.getElementById("nav");
-
-// icons.addEventListener('click', function () {
-//   nav.classList.toggle('navactive');
-// });
-
-// let toggle = document.querySelector('.toggle');
-// let nav = document.querySelector('nav');
-
-// toggle.addEventListener('click', function(){
-//   nav.classList.toggle('blablabla');
-// })
-
-const icons = document.querySelector('#icons');
-const nav = document.querySelector('#nav');
-
-icons.addEventListener('click', ()=> {
-  nav.classList.toggle('navactive');
+burgerButton.addEventListener('click', function(){
+  navig.style.display='block';
 });

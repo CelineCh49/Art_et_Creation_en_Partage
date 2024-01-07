@@ -75,16 +75,7 @@ class RegistrationFormType extends AbstractType
                     'title' => 'Un numéro de téléphone valide doit comporter 10 chiffres.'
                 ]
             ])
-            // ->add('roles', ChoiceType::class, [
-            //     'choices' => [ 
-            //         'Artiste' => 'ROLE_ARTIST',
-            //         'Admin' => 'ROLE_ADMIN',
-            //     ],
-            //     'mapped' => false,
-            //     'expanded' => true,
-            //     'multiple' => true, 
-            //     'required' => true,
-            // ])
+           
         ;
     }
 

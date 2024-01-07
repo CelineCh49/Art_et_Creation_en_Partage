@@ -105,28 +105,6 @@ class UserController extends AbstractController
         return $errors;
     }
 
- 
-    // #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    // public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
-    // {
-    //     $user = new User();
-    //     $form = $this->createForm(UserType::class, $user);
-    //     $form->handleRequest($request);
-
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-
-    //         $entityManager->persist($user);
-    //         $entityManager->flush();
-
-    //         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-    //     }
-
-    //     return $this->render('user/new.html.twig', [
-    //         'user' => $user,
-    //         'form' => $form,
-    //     ]);
-    // }
     
     #[IsGranted("ROLE_ADMIN")]
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
@@ -145,14 +123,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-        //     $roles = $user->getRoles();
-        //     $isAdmin = $form->get('isAdmin')->getData();
-        //     if ($isAdmin) {
-        //         $roles[] = 'ROLE_ADMIN';
-        //     } else {
-        //         $roles = array_diff($roles, ['ROLE_ADMIN']);
-        //     }
-        //     $user->setRoles(array_unique($roles));
 
             $entityManager->flush();
 

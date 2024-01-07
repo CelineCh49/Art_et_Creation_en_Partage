@@ -55,10 +55,7 @@ class UserType extends AbstractType
                     ]),
                 ],
             ])
-            // ->add('isAdmin', CheckboxType::class, [
-            //     'label' => 'Administrateur',
-            //     'required' => false,
-            // ]);
+            
         ;
     }
 

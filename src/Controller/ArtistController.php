@@ -240,29 +240,6 @@ class ArtistController extends AbstractController
             return $this->redirectToRoute('app_artist_index', [], Response::HTTP_SEE_OTHER);
         }
     }
-
-
-
-    // //AJAX request
-    // $data = json_decode($request->getContent(),true); // true: to get column name
-
-    // //check if token is valid
-    // if ($this->isCsrfTokenValid('delete'.$artistImage->getId(), $data['_token'])){//token name : 'deleteId'
-    //    //Get image name
-    //     $name=$artistImage->getFileName();
-    //     //delete the file in the directory
-    //     unlink($this->getParameter('artist_images_directory').'/'.$name);
-    //     //delete in the database
-    //     $entityManager->remove($artistImage);
-    //     $entityManager->flush();
-
-    //     //Json response
-    //     return new JsonResponse(['success'=>1]);
-    // }
-    // else{
-    //     return new JsonResponse(['error'=>'Token invalide'], 400);
-    // }
-
     public function checkArtist(Artist $artist): array
     {
         $errors = [];

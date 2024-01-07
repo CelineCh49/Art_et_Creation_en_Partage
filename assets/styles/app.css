@@ -86,8 +86,15 @@ margin: 0 auto;
     }
 }
 
+/*****************Menu burger************/
+#navig{
+    display:none;
+}
+
+
+
 /**********************Navbar********************/
-nav{
+/* nav{
 font-size: calc(0.5rem + 1.5vw); 
 }
  #icons{
@@ -125,8 +132,8 @@ font-size: calc(0.5rem + 1.5vw);
     }
     nav .navactive ul{
         left:0;
-    }
-} 
+    } 
+
 /* .toggle{
    display:none;
 }
